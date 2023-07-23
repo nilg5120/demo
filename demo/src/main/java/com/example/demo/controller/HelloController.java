@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +17,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.History;
+import com.example.demo.entity.Todo;
+import com.example.demo.repository.TodoRepository;
+
 
 @Controller
+@AllArgsConstructor
 public class HelloController {
+
+    private final TodoRepository todoRepository;
 
     @Autowired
     HttpSession session;
@@ -70,5 +79,20 @@ public class HelloController {
         mv.addObject("histories", histories);
         return mv;
     }
+
+    
+
+    @GetMapping("/todo")
+    public ModelAndView showTodoList(ModelAndView mv) {
+        //一覧画面に遷移
+        System.out.println("showTodoList");
+        mv.setViewName("todoList");
+        List<Todo>todoList = todoRepository.findAll();
+        mv.addObject("todoList", todoList);
+        return mv;
+    }
+    
+
+
 
 }
