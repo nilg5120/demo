@@ -83,6 +83,11 @@ public class HelloController {
         return mv;
     }
 
+    @RequestMapping("/sf6")
+    public String input(Model model) {
+        return "sf6";
+    }
+
     
 
     @GetMapping("/todo")

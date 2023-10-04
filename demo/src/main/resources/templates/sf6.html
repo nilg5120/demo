@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Hello</title>
+</head>
+
+<body>
+    <h1 th:text="${title}"></h1>
+    <p>
+        <div th:text="${message}" />
+    </p>
+    <script>
+        alert("Hello World!");
+    </script>
+    <button type="button"
+            onclick="clickFunction()">
+            ボタン
+    </button>
+    <script>
+        function clickFunction() {
+          alert('クリックされました。');
+        }
+      </script>
+    <input type="submit" value="サブミット" >
+    </input>
+
+</body>
+</html>
