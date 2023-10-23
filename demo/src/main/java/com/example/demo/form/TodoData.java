@@ -4,13 +4,15 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import com.example.demo.entity.Todo;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class TodoData {
+
+    //@NotNullをつけると、saveandflushの際にnullなので、エラーになる
     private Integer id;
 
     @NotBlank(message = "タイトルを入力してください")
@@ -19,7 +21,7 @@ public class TodoData {
     @NotNull(message = "重要度を入力してください")
     private Integer importance;
 
-    @Min(value = 1, message = "緊急度を入力してください")
+    @Min(value = 0, message = "緊急度を入力してください")
     private Integer urgency;
 
     private String deadline;
