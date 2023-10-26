@@ -61,7 +61,7 @@ public class HelloController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showHello(Model model) {
         model.addAttribute("title", "Hello World!");
-        model.addAttribute("message", "ようこそ、ばったん技術ブログへ");
+        model.addAttribute("message", "ようこそ、オオクボのテストページへ");
         return "hello";
     }
 
@@ -73,6 +73,11 @@ public class HelloController {
     @RequestMapping("/sf6")
     public String sf6(Model model) {
         return "sf6";
+    }
+
+    @RequestMapping("/resume")
+    public String resume(Model model) {
+        return "resume";
     }
 
     @GetMapping("/game")
