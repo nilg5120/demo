@@ -83,8 +83,9 @@ public class HelloController {
     @GetMapping("/todo")
     public ModelAndView showTodoList(ModelAndView mv,@PageableDefault(page = 0, size = 5, sort = "id")Pageable pageable) {
         //一覧画面に遷移
-        mv.setViewName("todoList");
+        mv.setViewName("use/todoList");
 
+        @SuppressWarnings("null")
         Page<Todo> todoPage = todoRepository.findAll(pageable);
         mv.addObject("todoQuery", new TodoQuery());
         mv.addObject("todoPage", todoPage);
@@ -102,6 +103,7 @@ public class HelloController {
         return mv;
     }
 
+    @SuppressWarnings("null")
     @PostMapping("/todo/create")
     public String createTodo(@ModelAttribute @Validated TodoData todoData, BindingResult result, Model model) {
         
@@ -139,6 +141,7 @@ public class HelloController {
     }
     
 
+    @SuppressWarnings("null")
     @PostMapping("/todo/update")
     public String updateTodo(@ModelAttribute @Validated TodoData todoData, BindingResult result, Model model) {
         //更新処理
@@ -152,6 +155,7 @@ public class HelloController {
         }
     }
         
+    @SuppressWarnings("null")
     @PostMapping("/todo/delete")
     public String deleteTodo(@ModelAttribute TodoData todoData) {
         //削除処理

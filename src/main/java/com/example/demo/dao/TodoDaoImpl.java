@@ -122,6 +122,7 @@ public class TodoDaoImpl implements TodoDao{
         typedQuery.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
         typedQuery.setMaxResults(pageable.getPageSize());
 
+        @SuppressWarnings("null")
         Page<Todo> page = new PageImpl<Todo>(typedQuery.getResultList(),pageable,totalRows);
 
         return page;

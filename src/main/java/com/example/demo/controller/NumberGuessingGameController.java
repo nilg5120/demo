@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.History;
+import com.example.demo.util.SessionUtils;
+
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @Controller
-public class numberGuessingGameController {
+public class NumberGuessingGameController {
 
-    private final HttpSession session;
+    private HttpSession session = null;
 
-    public numberGuessingGameController(HttpSession session) {
+    public void numberGuessingGameController(HttpSession session) {
         this.session = session;
     }
 
@@ -31,15 +33,9 @@ public class numberGuessingGameController {
 
     @PostMapping("/challenge")
     public ModelAndView challenge(@RequestParam("number") int number, ModelAndView mv) {
-
-        // セッションから正解を取得
         int answer = (int) session.getAttribute("answer");
-
-        List<History> histories = (List<History>) session.getAttribute("histories");
-        if (histories == null) {
-            histories = new ArrayList<>();
-            session.setAttribute("histories", histories);
-        }
+        
+        List<History> histories = SessionUtils.getHistories(session).orElse(new ArrayList<>());
 
         if (answer < number) {
             histories.add(new History(histories.size() + 1, number, "大きい"));
@@ -49,6 +45,7 @@ public class numberGuessingGameController {
             histories.add(new History(histories.size() + 1, number, "正解"));
         }
 
+        session.setAttribute("histories", histories);
         mv.setViewName("use/NumberGuessingGame");
         mv.addObject("histories", histories);
         return mv;
