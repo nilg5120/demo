@@ -16,15 +16,11 @@ import java.util.Random;
 @Controller
 public class NumberGuessingGameController {
 
-    private HttpSession session = null;
-
-    public void numberGuessingGameController(HttpSession session) {
-        this.session = session;
-    }
-
     @GetMapping("/NumberGuessingGame")
-    public String NumberGuessingGame() {
-        session.invalidate();
+    public String NumberGuessingGame(HttpSession session) {
+        // セッションの特定の属性をリセット
+        session.removeAttribute("answer");
+        session.removeAttribute("histories");
         Random rnd = new Random();
         int answer = rnd.nextInt(100) + 1;
         session.setAttribute("answer", answer);
@@ -32,7 +28,15 @@ public class NumberGuessingGameController {
     }
 
     @PostMapping("/challenge")
-    public ModelAndView challenge(@RequestParam("number") int number, ModelAndView mv) {
+    public ModelAndView challenge(@RequestParam("number") int number, ModelAndView mv , HttpSession session) {
+
+        // ユーザー入力のバリデーション
+        if (number < 1 || number > 100) {
+            mv.addObject("error", "入力は1から100の間でなければなりません。");
+            mv.setViewName("use/NumberGuessingGame");
+            return mv; // ここで処理を終了し、ビューにエラーメッセージを渡す
+        }
+
         int answer = (int) session.getAttribute("answer");
         
         List<History> histories = SessionUtils.getHistories(session).orElse(new ArrayList<>());

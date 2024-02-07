@@ -16,6 +16,9 @@ lang="ja">
 </head>
 <body>
     <h1>数あてゲーム</h1>
+    // エラーメッセージがあれば表示
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
     <form action="challenge" method="post">
         <p>
             <input type="text" name="number" placeholder="いくつでしょう"/>
