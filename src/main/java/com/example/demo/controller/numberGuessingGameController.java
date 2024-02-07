@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
-public class NumberGuessingGameController {
+public class numberGuessingGameController {
 
     private final HttpSession session;
 
-    public NumberGuessingGameController(HttpSession session) {
+    public numberGuessingGameController(HttpSession session) {
         this.session = session;
     }
 
