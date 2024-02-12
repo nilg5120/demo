@@ -92,7 +92,7 @@ public class TodoController {
     }
     
     @GetMapping("/todo/{id}")
-    public ModelAndView todoById(@PathVariable(name = "id") int id, ModelAndView mv) {
+    public ModelAndView todoById(@PathVariable int id, ModelAndView mv) {
         todoRepository.findById(id).ifPresentOrElse(
             todo -> {
                 mv.setViewName("use/todoForm");

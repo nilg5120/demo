@@ -28,7 +28,7 @@ public class NumberGuessingGameController {
     }
 
     @PostMapping("/challenge")
-    public ModelAndView challenge(@RequestParam("number") int number, ModelAndView mv , HttpSession session) {
+    public ModelAndView challenge(@RequestParam int number, ModelAndView mv , HttpSession session) {
 
         // ユーザー入力のバリデーション
         if (number < 1 || number > 100) {

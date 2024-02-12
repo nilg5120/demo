@@ -8,8 +8,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.demo.dao.TodoDaoImpl;
 
 @Controller
@@ -23,7 +23,7 @@ public class HelloController {
         new TodoDaoImpl(entityManager);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public String showHello(Model model) {
         model.addAttribute("title", "Hello World!");
         model.addAttribute("message", "ようこそ、オオクボのテストページへ");
@@ -54,8 +54,4 @@ public class HelloController {
     public String html(Model model) {
         return "use/html";
     }
-
-
-
-
 }
