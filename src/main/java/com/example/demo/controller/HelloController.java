@@ -3,14 +3,11 @@ package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import lombok.RequiredArgsConstructor;
-
-import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.example.demo.dao.TodoDaoImpl;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,10 +15,7 @@ public class HelloController {
 
     @PersistenceContext
     private EntityManager entityManager;
-    @PostConstruct
-    public void init() {
-        new TodoDaoImpl(entityManager);
-    }
+
 
     @GetMapping("/")
     public String showHello(Model model) {
