@@ -1,9 +1,30 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>コンボ集</title>
 </head>
 <body>
+    <h1>コンボ集</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>ダメージ</th>
+                <th>入力</th>
+                <th>スタートアップ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="combo : ${combos}">
+                <td th:text="${combo.id}"></td>
+                <td th:text="${combo.name}"></td>
+                <td th:text="${combo.damage}"></td>
+                <td th:text="${combo.input}"></td>
+                <td th:text="${combo.startup}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

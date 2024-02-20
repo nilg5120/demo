@@ -19,4 +19,8 @@ public class JP_combosService {
     public List<JP_combosEntity> findAllMoves() {
         return JP_combosRepository.findAll();
     }
+
+    public JP_combosEntity saveJP_combo(JP_combosEntity newMove) {
+        return JP_combosRepository.save(newMove);
+    }
 }
