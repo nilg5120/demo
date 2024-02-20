@@ -20,7 +20,7 @@ public class JP_combosController {
     @GetMapping("/combo")
     public String showCombos(Model model) {
         List<JP_combosEntity> combos = jp_combosService.findAllMoves();
-        model.addAttribute("combos", combos); // モデルにデータを追加
+        model.addAttribute("combos", combos);
         return "use/combo";
     }
 }
