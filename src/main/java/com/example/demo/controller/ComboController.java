@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.ComboEntity;
-import com.example.demo.service.ComboService;
+import com.example.demo.entity.JP_movesEntity;
+import com.example.demo.service.JP_moveService;
 
 import java.util.List;
 
@@ -13,14 +13,14 @@ import java.util.List;
 @RequestMapping("/jp-moves") // エンドポイントのURL
 public class ComboController {
 
-    private final ComboService comboservice;
+    private final JP_moveService comboservice;
 
-    public ComboController(ComboService comboservice) {
+    public ComboController(JP_moveService comboservice) {
         this.comboservice = comboservice;
     }
 
     @GetMapping
-    public List<ComboEntity> getAllJpMoves() {
+    public List<JP_movesEntity> getAllJpMoves() {
         return comboservice.findAllMoves();
     }
 }

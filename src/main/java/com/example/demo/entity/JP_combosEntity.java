@@ -5,12 +5,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "jp_moves")
-public class ComboEntity {
+@Table(name = "jp_combos")
+public class JP_combosEntity {
 
     @Id
     private Long id;
     private String name;
+    private int damage;
     private String input;
     private Integer startup;
 
@@ -30,6 +31,14 @@ public class ComboEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public String getInput() {
@@ -55,6 +64,7 @@ public class ComboEntity {
         return "JpMove{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", damage='" + damage + '\'' +
                 ", input='" + input + '\'' +
                 ", startup=" + startup +
                 '}';
