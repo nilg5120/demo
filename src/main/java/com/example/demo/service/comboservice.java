@@ -2,21 +2,21 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.comboentity;
-import com.example.demo.repository.comborepository;
+import com.example.demo.entity.ComboEntity;
+import com.example.demo.repository.ComboRepository;
 
 import java.util.List;
 
 @Service
-public class comboservice {
+public class ComboService {
 
-    private final comborepository ComboRepository;
+    private final ComboRepository ComboRepository;
 
-    public comboservice(comborepository ComboRepository) {
+    public ComboService(ComboRepository ComboRepository) {
         this.ComboRepository = ComboRepository;
     }
 
-    public List<comboentity> findAllMoves() {
+    public List<ComboEntity> findAllMoves() {
         return ComboRepository.findAll();
     }
 }

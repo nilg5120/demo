@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "jp_moves")
-public class comboentity {
+public class ComboEntity {
 
     @Id
     private Long id;
