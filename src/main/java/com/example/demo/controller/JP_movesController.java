@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/jp-moves") // エンドポイントのURL
-public class ComboController {
+public class JP_movesController {
 
     private final JP_moveService comboservice;
 
-    public ComboController(JP_moveService comboservice) {
+    public JP_movesController(JP_moveService comboservice) {
         this.comboservice = comboservice;
     }
 

@@ -10,13 +10,13 @@ import java.util.List;
 @Service
 public class JP_moveService {
 
-    private final JP_movesRepository ComboRepository;
+    private final JP_movesRepository JP_movesRepository;
 
-    public JP_moveService(JP_movesRepository ComboRepository) {
-        this.ComboRepository = ComboRepository;
+    public JP_moveService(JP_movesRepository JP_movesRepository) {
+        this.JP_movesRepository = JP_movesRepository;
     }
 
     public List<JP_movesEntity> findAllMoves() {
-        return ComboRepository.findAll();
+        return JP_movesRepository.findAll();
     }
 }
