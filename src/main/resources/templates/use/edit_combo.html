@@ -6,6 +6,14 @@
 </head>
 <body>
     <h1>コンボ編集</h1>
+    <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>ダメージ</th>
+        <th>入力</th>
+        <th>スタートアップ</th>
+        <th>操作</th>
+    </tr>
     <form th:action="@{'/combos/' + ${combo.id} + '/edit'}" th:method="post" th:object="${combo}">
         <!-- 編集フォームの入力フィールド -->
         <input type="text" th:field="*{name}" />
