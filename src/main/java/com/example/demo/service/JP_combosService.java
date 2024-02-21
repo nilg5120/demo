@@ -38,5 +38,7 @@ public class JP_combosService {
         return JP_combosRepository.findById(id).orElseThrow();
     }
 
-    
+    public void deleteById(Long id) {
+        JP_combosRepository.deleteById(id);
+    }
 }

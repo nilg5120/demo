@@ -31,13 +31,25 @@ public class JP_combosController {
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         JP_combosEntity comboToEdit = jp_combosService.findById(id); // idに基づいてエンティティを取得
         model.addAttribute("combo", comboToEdit);
-        return "use/edit_combo";
+        return "use/combo_edit";
     }
 
     @PostMapping("/combos/{id}/edit")
     public String updateCombo(@PathVariable("id") Long id, @ModelAttribute JP_combosEntity updatedCombo) {
         jp_combosService.updateCombo(id, updatedCombo); // コンボを更新する
         return "redirect:/combo"; // 編集後にコンボ一覧ページにリダイレクトする
+    }
+
+    @GetMapping("/combos/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("combo", new JP_combosEntity());
+        return "use/combo_add";
+    }
+
+    @PostMapping("/combos/add")
+    public String addCombo(@ModelAttribute JP_combosEntity newCombo) {
+        jp_combosService.saveJP_combo(newCombo); // 新しいコンボを保存する
+        return "redirect:/combo"; // 保存後にコンボ一覧ページにリダイレクトする
     }
 
 
