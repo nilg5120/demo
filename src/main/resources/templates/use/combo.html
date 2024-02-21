@@ -14,6 +14,7 @@
                 <th>ダメージ</th>
                 <th>入力</th>
                 <th>スタートアップ</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,10 @@
                 <td th:text="${combo.damage}"></td>
                 <td th:text="${combo.input}"></td>
                 <td th:text="${combo.startup}"></td>
+                <td>
+                    <button th:onclick="'location.href=\'/combos/' + ${combo.id} + '/edit\''">編集</button>
+                    <button th:onclick="'location.href=\'/combos/' + ${combo.id} + '/delete\''">削除</button>
+                </td>
             </tr>
         </tbody>
     </table>
