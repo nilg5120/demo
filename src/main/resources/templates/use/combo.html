@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>コンボ集</title>
+    <script src="combo.js"></script>
 </head>
 <body>
+    
     <h1>コンボ集</h1>
     <table>
         <thead>
@@ -25,7 +27,7 @@
                 <td th:text="${combo.input}"></td>
                 <td th:text="${combo.startup}"></td>
                 <td>
-                    <button th:onclick="'location.href=\'/combos/' + ${combo.id} + '/edit\''">編集</button>
+                    <a th:href="@{'/combos/' + ${combo.id} + '/edit'}" class="edit-btn">編集</a>
                     <button th:onclick="'location.href=\'/combos/' + ${combo.id} + '/delete\''">削除</button>
                 </td>
             </tr>

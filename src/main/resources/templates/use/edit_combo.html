@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>コンボ編集</title>
+</head>
+<body>
+    <h1>コンボ編集</h1>
+    <form th:action="@{'/combos/' + ${combo.id} + '/edit'}" th:method="post" th:object="${combo}">
+        <!-- 編集フォームの入力フィールド -->
+        <input type="text" th:field="*{name}" />
+        <input type="number" th:field="*{damage}" />
+        <!-- 他のフィールドも同様に追加 -->
+        <input type="submit" value="更新" />
+    </form>
+</body>
+</html>
