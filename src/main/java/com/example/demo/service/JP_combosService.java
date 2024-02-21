@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
-
 import com.example.demo.entity.JP_combosEntity;
 import com.example.demo.repository.JP_combosRepository;
 
@@ -41,4 +40,5 @@ public class JP_combosService {
     public void deleteById(Long id) {
         JP_combosRepository.deleteById(id);
     }
+
 }

@@ -29,7 +29,7 @@
                 <td th:text="${combo.startup}"></td>
                 <td>
                     <a th:href="@{'/combos/' + ${combo.id} + '/edit'}" class="edit-btn">編集</a>
-                    <button th:onclick="'location.href=\'/combos/' + ${combo.id} + '/delete\''">削除</button>
+                    <button class="delete-btn" th:data-id="${combo.id}">削除</button>
                 </td>
             </tr>
         </tbody>
