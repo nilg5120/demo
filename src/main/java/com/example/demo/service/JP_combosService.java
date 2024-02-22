@@ -16,7 +16,7 @@ public class JP_combosService {
         this.JP_combosRepository = JP_combosRepository;
     }
 
-    public List<JP_combosEntity> findAllMoves() {
+    public List<JP_combosEntity> findAllCombos() {
         return JP_combosRepository.findAll();
     }
 
