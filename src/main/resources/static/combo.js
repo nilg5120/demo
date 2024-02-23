@@ -35,12 +35,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+
+    //***編集、保存ボタンが押されたときにコンボを編集
     const container = document.getElementById('buttons-container'); // ボタンが含まれるコンテナのID
 
     container.addEventListener('click', function(event) {
         const target = event.target; // クリックされた要素
         if (!target.closest('tr')) return; // trがない場合は処理をしない
         const comboId = target.getAttribute('data-id'); // 正しくcomboIdを取得
+
+        //編集ボタンの処理
 
         if (target.classList.contains('edit-btn')) {
             console.log('編集ボタンが押されました'+comboId);
@@ -69,9 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log(name+damage+input+startup);
 
-
-            //ここがうまくいかない
-
             fetch(`/combos/${comboId}/edit`, {
                 method: 'POST',
                 headers: {
@@ -87,8 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .catch(error => console.error('Error:', error));
-
-            //↑ここまで
 
             // テキストを表示モードに戻す
             row.querySelector('[data-name="name"]').textContent = name;
