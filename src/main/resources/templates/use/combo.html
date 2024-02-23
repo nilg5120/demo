@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr th:each="combo : ${combos}">
-                <td th:text="${combo.id}"></td>
+                <td th:text="${combo.id}" data-id="${combo.id}"></td>
                 <td><span class="editable" data-name="name" th:data-id="${combo.id}" th:text="${combo.name}"></span></td>
                 <td><span class="editable" data-name="damage" th:data-id="${combo.id}" th:text="${combo.damage}"></span></td>
                 <td><span class="editable" data-name="input" th:data-id="${combo.id}" th:text="${combo.input}"></span></td>
