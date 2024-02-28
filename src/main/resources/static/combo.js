@@ -1,62 +1,24 @@
-document.addEventListener('DOMContentLoaded', function () {
-
-    let comboId;
-    let nameSpan;
-    let damageSpan;
-    let inputSpan;
-    let startupSpan;
-
-    
-
-    //***削除ボタンが押されたときにコンボを削除
-
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function (event) {
-
-            console.log('delete-btnが押されました');
-            event.preventDefault();
-            const comboId = this.getAttribute('data-id');
-
-            if (confirm('このコンボを削除してもよろしいですか？')) {
-                fetch('/combos/' + comboId + '/delete', {
-                    method: 'DELETE',
-                })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.reload(); // 成功したらページをリロード
-                    } else {
-                        alert('削除に失敗しました。');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+//削除ボタンを押したときの処理
+function deleteCombo(comboId) {
+    if (confirm('このコンボを削除してもよろしいですか？')) {
+        fetch('/combos/' + comboId + '/delete', {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload(); // 成功したらページをリロード
+            } else {
+                alert('削除に失敗しました。');
             }
-        });
-    });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
 
+function clickButton(row, button) {
+    if (button.textContent === '編集') {
+        console.log(row+'clickButtonが押されました');
 
-    //***編集、保存ボタンが押されたときにコンボを編集
-    const container = document.getElementById('buttons-container');
-
-    container.addEventListener('click', function(event) {
-        const target = event.target;
-        const row = target.closest('tr');
-
-        if (!row || !target.matches('button')) return;
-
-        const comboId = target.getAttribute('data-id');
-
-        if (target.classList.contains('edit-btn')) {
-            // 編集ボタンのロジック
-            setupEdit(row, target);
-        } else if (target.classList.contains('save-btn')) {
-            // 保存ボタンのロジック
-            saveChanges(row, target);
-        }
-    });
-
-    function setupEdit(row, button) {
         const nameSpan = row.querySelector('[data-name="name"]');
         const damageSpan = row.querySelector('[data-name="damage"]');
         const inputSpan = row.querySelector('[data-name="input"]');
@@ -69,15 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         button.textContent = '保存';
         button.classList.replace('edit-btn', 'save-btn');
-
-        button.removeEventListener('click', setupEdit);
-        button.addEventListener('click', function() {
-            saveChanges(row, button);
-        });
-    }
-
-    function saveChanges(row, button) {
-        // comboId と入力フィールドの値を取得
+    }else{
+        console.log(row+'保存clickButtonが押されました');
         const comboId = button.getAttribute('data-id');
         const nameInput = row.querySelector('[data-name="name"] input');
         const damageInput = row.querySelector('[data-name="damage"] input');
@@ -117,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
             alert('更新中にエラーが発生しました');
         });
-        target.textContent = '編集';
-        target.classList.replace('save-btn', 'edit-btn');
+        button.textContent = '編集';
+        button.classList.replace('save-btn', 'edit-btn');
     }
-
-});
+    
+}

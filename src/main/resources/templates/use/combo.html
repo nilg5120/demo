@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>コンボ集</title>
-    <script src="combo.js"></script>
+    <script src="combo copy.js"></script>
 </head>
 <body>
     
-    <h1>コンボ集</h1>
+    <h1>コンボ集テスト</h1>
     <a href="/combos/add" class="add-btn">追加</a>
     <table>
         <thead>
@@ -28,8 +28,8 @@
                 <td><span class="editable" data-name="input" th:data-id="${combo.id}" th:text="${combo.input}"></span></td>
                 <td><span class="editable" data-name="startup" th:data-id="${combo.id}" th:text="${combo.startup}"></span></td>
                 <td id="buttons-container">
-                    <button class="edit-btn" th:data-id="${combo.id}">編集</button>
-                    <button class="delete-btn" th:data-id="${combo.id}">削除</button>
+                    <button class="edit-btn" th:data-id="${combo.id}" onclick="clickButton(this.closest('tr'), this)">編集</button>
+                    <button class="delete-btn" th:data-id="${combo.id}" onclick="deleteCombo(this.getAttribute('data-id'))">削除</button>
                 </td>
             </tr>
         </tbody>
