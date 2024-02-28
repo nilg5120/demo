@@ -28,7 +28,7 @@
                 <td><span class="editable" data-name="input" th:data-id="${combo.id}" th:text="${combo.input}"></span></td>
                 <td><span class="editable" data-name="startup" th:data-id="${combo.id}" th:text="${combo.startup}"></span></td>
                 <td id="buttons-container">
-                    <button class="edit-btn" th:data-id="${combo.id}">編集</button>
+                    <button class="edit-btn" th:data-id="${combo.id}" onclick="clickButton(this.closest('tr'), this)">編集</button>
                     <button class="delete-btn" th:data-id="${combo.id}" onclick="deleteCombo(this.getAttribute('data-id'))">削除</button>
                 </td>
             </tr>
