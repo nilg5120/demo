@@ -24,12 +24,20 @@ public class JP_combosController {
     public JP_combosController(JP_combosService jp_combosService) {
         this.jp_combosService = jp_combosService;
     }
-
+    /*
     @GetMapping("/combo")
     public String showCombos(Model model) {
         List<JP_combosEntity> combos = jp_combosService.findAllCombos();
         model.addAttribute("combos", combos);
         return "use/combo";
+    }
+    */
+    //テスト用
+    @GetMapping("/combo")
+    public String showCombos(Model model) {
+        List<JP_combosEntity> combos = jp_combosService.findAllCombos();
+        model.addAttribute("combos", combos);
+        return "use/combo copy";
     }
 
     @PostMapping("/combos/{id}/edit")
