@@ -48,4 +48,9 @@ public class HelloController {
     public String html(Model model) {
         return "use/html";
     }
+
+    @RequestMapping("/buttontest")
+    public String buttontest(Model model) {
+        return "use/buttontest";
+    }
 }
