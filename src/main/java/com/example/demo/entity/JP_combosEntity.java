@@ -17,6 +17,7 @@ public class JP_combosEntity {
     private int damage;
     private String input;
     private Integer startup;
+    private String explain;
 
     // Getters and setters
 
@@ -60,6 +61,14 @@ public class JP_combosEntity {
         this.startup = startup;
     }
 
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
+    }
+
     // toString method for debugging purposes
 
     @Override
@@ -69,7 +78,8 @@ public class JP_combosEntity {
                 ", name='" + name + '\'' +
                 ", damage='" + damage + '\'' +
                 ", input='" + input + '\'' +
-                ", startup=" + startup +
+                ", startup=" + startup + '\'' +
+                ", explain='" + explain +
                 '}';
     }
 }
