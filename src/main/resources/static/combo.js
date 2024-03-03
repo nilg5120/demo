@@ -23,12 +23,16 @@ function clickButton(row, button) {
         const damageSpan = row.querySelector('[data-name="damage"]');
         const inputSpan = row.querySelector('[data-name="input"]');
         const startupSpan = row.querySelector('[data-name="startup"]');
+        const usagedgSpan = row.querySelector('[data-name="usagedg"]');
+        const usagesaSpan = row.querySelector('[data-name="usagesa"]');
         const explainSpan = row.querySelector('[data-name="explain"]');
 
         nameSpan.innerHTML = `<input type="text" value="${nameSpan.textContent.trim()}">`;
         damageSpan.innerHTML = `<input type="text" value="${damageSpan.textContent.trim()}">`;
         inputSpan.innerHTML = `<input type="text" value="${inputSpan.textContent.trim()}">`;
         startupSpan.innerHTML = `<input type="text" value="${startupSpan.textContent.trim()}">`;
+        usagedgSpan.innerHTML = `<input type="text" value="${usagedgSpan.textContent.trim()}">`;
+        usagesaSpan.innerHTML = `<input type="text" value="${usagesaSpan.textContent.trim()}">`;
         explainSpan.innerHTML = `<input type="text" value="${explainSpan.textContent.trim()}">`;
 
 
@@ -41,6 +45,8 @@ function clickButton(row, button) {
         const damageInput = row.querySelector('[data-name="damage"] input');
         const inputInput = row.querySelector('[data-name="input"] input');
         const startupInput = row.querySelector('[data-name="startup"] input');
+        const usagedgInput = row.querySelector('[data-name="usagedg"] input');
+        const usagesaInput = row.querySelector('[data-name="usagesa"] input');
         const explainInput = row.querySelector('[data-name="explain"] input');
     
         // 入力値を変数に格納
@@ -48,6 +54,8 @@ function clickButton(row, button) {
         const damage = damageInput.value;
         const input = inputInput.value;
         const startup = startupInput.value;
+        const usagedg = usagedgInput.value;
+        const usagesa = usagesaInput.value;
         const explain = explainInput.value;
     
         // サーバーに送信
@@ -56,7 +64,7 @@ function clickButton(row, button) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, damage, input, startup })
+            body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup })
         })
         .then(response => {
             if (response.ok) {
@@ -67,6 +75,8 @@ function clickButton(row, button) {
                 damageInput.parentNode.textContent = damage;
                 inputInput.parentNode.textContent = input;
                 startupInput.parentNode.textContent = startup;
+                usagedgInput.parentNode.textContent = usagedg;
+                usagesaInput.parentNode.textContent = usagesa;
                 explainInput.parentNode.textContent = explain;
     
                 // その他のコード

@@ -13,6 +13,8 @@ public class JP_movesEntity {
     private String name;
     private String input;
     private Integer startup;
+    private Integer usagedg;
+    private Integer usagesa;
 
     // Getters and setters
 
@@ -46,6 +48,22 @@ public class JP_movesEntity {
 
     public void setStartup(Integer startup) {
         this.startup = startup;
+    }
+
+    public Integer getUsagedg() {
+        return usagedg;
+    }
+
+    public void setUsagedg(Integer usagedg) {
+        this.usagedg = usagedg;
+    }
+
+    public Integer getUsagesa() {
+        return usagesa;
+    }
+
+    public void setUsagesa(Integer usagesa) {
+        this.usagesa = usagesa;
     }
 
     // toString method for debugging purposes
