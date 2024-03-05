@@ -53,4 +53,9 @@ public class HelloController {
     public String buttontest(Model model) {
         return "use/buttontest";
     }
+
+    @RequestMapping("/tmptest")
+    public String test(Model model) {
+        return "use/tmptest";
+    }
 }
