@@ -1,20 +1,29 @@
 package com.example.demo.controller;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
-import lombok.RequiredArgsConstructor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entity.situationEntity;
+import com.example.demo.service.situationService;
+
+
 @Controller
-@RequiredArgsConstructor
 public class HelloController {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private final situationService situationService;
+
+    public HelloController(situationService situationService) {
+        this.situationService = situationService;
+    }
 
 
     @GetMapping("/")
@@ -54,8 +63,10 @@ public class HelloController {
         return "use/buttontest";
     }
 
-    @RequestMapping("/tmptest")
-    public String test(Model model) {
+    @GetMapping("/tmptest")
+    public String showsituation(Model model) {
+        List<situationEntity> situations = situationService.findAllsituation();
+        model.addAttribute("situations", situations);
         return "use/tmptest";
     }
 }
