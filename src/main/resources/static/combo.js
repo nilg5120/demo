@@ -47,6 +47,7 @@ function clickButton(row, button) {
         const startupInput = row.querySelector('[data-name="startup"] input');
         const usagedgInput = row.querySelector('[data-name="usagedg"] input');
         const usagesaInput = row.querySelector('[data-name="usagesa"] input');
+        const situationSpan = row.querySelector('[data-name="situation"]');
         const explainInput = row.querySelector('[data-name="explain"] input');
     
         // 入力値を変数に格納

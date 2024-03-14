@@ -91,7 +91,7 @@ public class JP_combosEntity {
 
     @Override
     public String toString() {
-        return "JpMove{" +
+        return "JpCombo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", damage='" + damage + '\'' +

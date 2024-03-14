@@ -22,14 +22,6 @@ public class situationEntity {
         this.id = id;
     }
 
-    public String getSituation() {
-        return situation;
-    }
-
-    public void setSituation(String situation) {
-        this.situation = situation;
-    }
-
     @Override
     public String toString() {
         return "JpMove{" +
