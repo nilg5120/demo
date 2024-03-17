@@ -47,19 +47,15 @@ public class JP_combosController {
 
     // ...
 
-        @Transactional
-        @PostMapping("/combos/{id}/edit")
-        public ResponseEntity<?> updateCombo(@PathVariable("id") Long id, @RequestBody JP_combosEntity updatedCombo) {
-            Logger logger = LoggerFactory.getLogger(JP_combosController.class);
-            logger.debug("Received update request for combo with id {}: {}", id, updatedCombo);
-            try {
-                jp_combosService.updateCombo(id, updatedCombo);
-                return ResponseEntity.ok().build();
-            } catch (Exception e) {
-                logger.error("Error updating combo: ", e);
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("エラーメッセージ");
-            }
+    @PostMapping("/combos/{id}/edit")
+    public ResponseEntity<?> updateCombo(@PathVariable("id") Long id, @RequestBody JP_combosEntity updatedCombo) {
+        try {
+            jp_combosService.updateCombo(id, updatedCombo); // コンボを更新する
+            return ResponseEntity.ok().build(); // 成功時は200 OKを返す
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("エラーメッセージ");
         }
+    }
     
 
     @GetMapping("/combos/add")

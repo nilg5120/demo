@@ -30,6 +30,9 @@ public class JP_combosService {
         combo.setDamage(updatedCombo.getDamage());
         combo.setInput(updatedCombo.getInput());
         combo.setStartup(updatedCombo.getStartup());
+        combo.setUsagedg(updatedCombo.getUsagedg());
+        combo.setUsagesa(updatedCombo.getUsagesa());
+        combo.setExplain(updatedCombo.getExplain());
         JP_combosRepository.save(combo);
     }
 

@@ -51,6 +51,7 @@ function clickButton(row, button) {
         const explainInput = row.querySelector('[data-name="explain"] input');
     
         // 入力値を変数に格納
+        const id = comboId;
         const name = nameInput.value;
         const damage = damageInput.value;
         const input = inputInput.value;
@@ -65,7 +66,7 @@ function clickButton(row, button) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup })
+            body: JSON.stringify({ id, name, damage, input, usagedg, usagesa, startup })
         })
         .then(response => {
             if (response.ok) {

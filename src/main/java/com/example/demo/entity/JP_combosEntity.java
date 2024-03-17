@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,13 +14,17 @@ public class JP_combosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
     private String name;
     private int damage;
     private String input;
     private Integer startup;
-    private String explain;
     private Integer usagedg;
     private Integer usagesa;
+
+    @Column(name = "`explain`") // バッククォートで囲むことで予約語をエスケープ
+    private String explain;
 
     // Getters and setters
 
@@ -97,9 +102,9 @@ public class JP_combosEntity {
                 ", damage='" + damage + '\'' +
                 ", input='" + input + '\'' +
                 ", startup=" + startup + '\'' +
+                ", explain='" + explain + '\'' +
                 ", usagedg=" + usagedg + '\'' +
-                ", usagesa=" + usagesa + '\'' +
-                ", explain='" + explain +
+                ", usagesa=" + usagesa +
                 '}';
     }
 }
