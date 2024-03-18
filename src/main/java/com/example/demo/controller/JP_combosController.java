@@ -15,9 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.JP_combosEntity;
 import com.example.demo.service.JP_combosService;
+
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 @Controller
@@ -47,6 +46,7 @@ public class JP_combosController {
 
     // ...
 
+    @Transactional
     @PostMapping("/combos/{id}/edit")
     public ResponseEntity<?> updateCombo(@PathVariable("id") Long id, @RequestBody JP_combosEntity updatedCombo) {
         try {

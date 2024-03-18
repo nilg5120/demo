@@ -21,27 +21,42 @@ public class JP_combosService {
     }
 
     public JP_combosEntity saveJP_combo(JP_combosEntity newMove) {
-        return JP_combosRepository.save(newMove);
+        if(newMove == null) {
+            throw new IllegalArgumentException("新しいコンボがnullです");
+        }else{
+            return JP_combosRepository.save(newMove);
+        }
     }
 
     public void updateCombo(Long id, JP_combosEntity updatedCombo) {
-        JP_combosEntity combo = JP_combosRepository.findById(id).orElseThrow();
-        combo.setName(updatedCombo.getName());
-        combo.setDamage(updatedCombo.getDamage());
-        combo.setInput(updatedCombo.getInput());
-        combo.setStartup(updatedCombo.getStartup());
-        combo.setUsagedg(updatedCombo.getUsagedg());
-        combo.setUsagesa(updatedCombo.getUsagesa());
-        combo.setExplain(updatedCombo.getExplain());
-        JP_combosRepository.save(combo);
+        if (id == null) {
+            throw new IllegalArgumentException("ID must not be null");
+        }else{
+            JP_combosEntity combo = JP_combosRepository.findById(id).orElseThrow();
+            combo.setName(updatedCombo.getName());
+            combo.setDamage(updatedCombo.getDamage());
+            combo.setInput(updatedCombo.getInput());
+            combo.setStartup(updatedCombo.getStartup());
+            combo.setUsagedg(updatedCombo.getUsagedg());
+            combo.setUsagesa(updatedCombo.getUsagesa());
+            combo.setExplain(updatedCombo.getExplain());
+            JP_combosRepository.save(combo);
+        }
     }
 
     public JP_combosEntity findById(Long id) {
-        return JP_combosRepository.findById(id).orElseThrow();
+        if (id == null) {
+            throw new IllegalArgumentException("ID must not be null");
+        }else{
+            return JP_combosRepository.findById(id).orElseThrow();
+        }
     }
 
     public void deleteById(Long id) {
-        JP_combosRepository.deleteById(id);
+        if (id == null) {
+            throw new IllegalArgumentException("ID must not be null");
+        }else{
+            JP_combosRepository.deleteById(id);
+        }
     }
-
 }
