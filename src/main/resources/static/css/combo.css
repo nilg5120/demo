@@ -5,3 +5,8 @@ p {
     color: green;
     font-size: 16px;
 }
+
+.icon {
+    width: 20px;  /* 幅を100ピクセルに設定 */
+    height: 20px;  /* 高さを自動調整 */
+}

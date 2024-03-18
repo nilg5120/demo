@@ -1,3 +1,8 @@
+window.addEventListener('DOMContentLoaded', (event) => {
+    // クラス 'editable' を持つすべての要素を取得します。
+    convertTextToImage();
+});
+
 //削除ボタンを押したときの処理
 function deleteCombo(comboId) {
     if (confirm('このコンボを削除してもよろしいですか？')) {
@@ -93,5 +98,32 @@ function clickButton(row, button) {
         button.textContent = '編集';
         button.classList.replace('save-btn', 'edit-btn');
     }
+    
+}
+
+//テキストを画像に変換する
+function convertTextToImage() {
+    document.querySelectorAll('.editable').forEach((element) => {
+        const patterns = [
+            { key: /HK/gi, value: '<img src="image/HK.png" alt="HK" class="icon"/>' },
+            { key: /HP/gi, value: '<img src="image/HP.png" alt="HP" class="icon"/>' },
+            { key: /LK/gi, value: '<img src="image/LK.png" alt="LK" class="icon"/>' },
+            { key: /LP/gi, value: '<img src="image/LP.png" alt="LP" class="icon"/>' },
+            { key: /MK/gi, value: '<img src="image/MK.png" alt="MK" class="icon"/>' },
+            { key: /MP/gi, value: '<img src="image/MP.png" alt="MP" class="icon"/>' },
+            // 他のパターンも同様に追加
+        ];
+
+        let updatedHTML = element.innerHTML;
+        patterns.forEach(pattern => {
+            updatedHTML = updatedHTML.replace(pattern.key, pattern.value);
+        });
+        element.innerHTML = updatedHTML;
+    });
+}
+
+
+//画像をテキストに変換する
+function convrtimagetotext() {
     
 }
