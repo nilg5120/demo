@@ -38,6 +38,7 @@ public class JP_combosServiceTest {
         assertThat(result).isEqualTo(expectedCombos);
     }
 
+    @SuppressWarnings("null")
     @Test
     void saveJP_combo_ShouldSaveCombo() {
         // Given

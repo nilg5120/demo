@@ -24,6 +24,8 @@ function clickButton(row, button) {
     if (button.textContent === '編集') {
         console.log(row+'clickButtonが押されました');
 
+        convertImageToText();
+
         const nameSpan = row.querySelector('[data-name="name"]');
         const damageSpan = row.querySelector('[data-name="damage"]');
         const inputSpan = row.querySelector('[data-name="input"]');
@@ -44,7 +46,11 @@ function clickButton(row, button) {
         button.textContent = '保存';
         button.classList.replace('edit-btn', 'save-btn');
     }else{
+
         console.log(row+'保存clickButtonが押されました');
+
+        
+
         const comboId = button.getAttribute('data-id');
         const nameInput = row.querySelector('[data-name="name"] input');
         const damageInput = row.querySelector('[data-name="damage"] input');
@@ -52,9 +58,13 @@ function clickButton(row, button) {
         const startupInput = row.querySelector('[data-name="startup"] input');
         const usagedgInput = row.querySelector('[data-name="usagedg"] input');
         const usagesaInput = row.querySelector('[data-name="usagesa"] input');
-        const situationSpan = row.querySelector('[data-name="situation"]');
         const explainInput = row.querySelector('[data-name="explain"] input');
-    
+        
+        if (!nameInput || !damageInput || !inputInput || !startupInput || !usagedgInput || !usagesaInput || !explainInput) {
+            console.error('One or more input elements could not be found');
+            return;
+        }
+        
         // 入力値を変数に格納
         const id = comboId;
         const name = nameInput.value;
@@ -71,7 +81,7 @@ function clickButton(row, button) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, name, damage, input, usagedg, usagesa, startup })
+            body: JSON.stringify({ id, name, damage, input, usagedg, usagesa, startup , explain})
         })
         .then(response => {
             if (response.ok) {
@@ -87,6 +97,8 @@ function clickButton(row, button) {
                 explainInput.parentNode.textContent = explain;
     
                 // その他のコード
+
+                convertTextToImage();
             } else {
                 // エラーハンドリング
             }
@@ -103,6 +115,7 @@ function clickButton(row, button) {
 
 //テキストを画像に変換する
 function convertTextToImage() {
+    console.log('convertTextToImage was called');
     document.querySelectorAll('.editable').forEach((element) => {
         const patterns = [
             { key: /HK/gi, value: '<img src="image/HK.png" alt="HK" class="icon"/>' },
@@ -114,7 +127,7 @@ function convertTextToImage() {
             // 他のパターンも同様に追加
         ];
 
-        let updatedHTML = element.innerHTML;
+        let updatedHTML = element.textContent;
         patterns.forEach(pattern => {
             updatedHTML = updatedHTML.replace(pattern.key, pattern.value);
         });
@@ -124,6 +137,15 @@ function convertTextToImage() {
 
 
 //画像をテキストに変換する
-function convrtimagetotext() {
-    
+function convertImageToText() {
+    document.querySelectorAll('.editable').forEach((element) => {
+        element.querySelectorAll('img').forEach((img) => {
+        // 'alt'属性からテキストを取得し、画像をそのテキストで置き換える
+        const altText = img.getAttribute('alt');
+            if (altText) {
+                const textNode = document.createTextNode(altText);
+                img.parentNode.replaceChild(textNode, img);
+            }
+        });
+    });
 }
