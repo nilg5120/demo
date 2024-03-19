@@ -1,0 +1,115 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 40px;
+    width: 210mm; /* A4の横幅に合わせる */
+    height: 297mm; /* A4の縦幅に合わせる */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* シャドウ効果 */
+    padding: 20mm; /* 余白 */
+    position: relative; /* 位置指定の基準として */
+}
+
+dl {
+    border: 1px solid #000; /* 1ピクセルの黒いボーダー */
+}
+
+dt, dd {
+    display: inline-block; /* インラインブロックとして表示 */
+}
+
+dt {
+    width: 100px; /* 幅を100ピクセルに設定。この値は適宜調整してください。 */
+    font-weight: bold; /* フォントを太字に */
+    margin-right: 10px; /* 右側の余白を10ピクセルに設定して、<dd>との間にスペースを作る */
+}
+
+div{
+    border: 1px solid #000;
+}
+
+#personalDetails {
+    background-color: #e9cfcf; /* 背景色を薄灰色に設定 */
+}
+
+#contactDetails {
+    background-color: #e9cfcf; /* 背景色を薄灰色に設定 */
+    margin: 0px;
+    width: 80%;
+}
+
+.box1-1{
+    background-color: #a49ed4; /* 背景色を薄灰色に設定 */
+    width: 650px;
+}
+
+.boxaddress{
+    height: 55px;
+}
+
+#email{
+    font-size: small;
+}
+
+#personalInfo {
+    background-color: #e9cfcf;
+}
+
+.photo-container img {
+    display: inline-flex;
+    width: 100px;
+    height: 100px;
+}
+
+.box1{
+    display: inline-flex;
+}
+
+.box2{
+    display: flex;
+}
+
+#container3-1{
+    display: flex;
+    margin: 0px;
+}
+
+#container3-2{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+}
+
+.year{
+    width: 10%;
+}
+
+.month{
+    width: 10%;
+}
+
+.detail{
+    width: 79%;
+}
+
+.boxname{
+    height: 60px;
+}
+
+.name{
+    line-height: 60px;
+    font-size: 30px;
+}
+
+.container{
+    margin: 0px;
+    padding: 0px;
+}
+
+.qualification-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+}
+
+ul {
+    list-style-type: none; /* マーカーを非表示にする */
+}

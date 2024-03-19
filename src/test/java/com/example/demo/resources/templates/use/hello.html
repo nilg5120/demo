@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hello</title>
+</head>
+
+<body>
+    <h1 th:text="${title}"></h1>
+    <p>
+        <div th:text="${message}" />
+    </p>
+    <button type="button"
+            th:href="@{/next}">
+            ボタン
+    </button>
+    <a th:href="@{/next}">Javascriptの学習</a>
+    <a th:href="@{/NumberGuessingGame}">ゲーム画面へ</a>
+    <a th:href="@{/todo}">todo画面へ</a>
+    <a th:href="@{/sf6}">sf6画面へ</a>
+    <a th:href="@{/resume}">履歴書へ</a>
+    <a th:href="@{/html}">htmlの実験</a>
+    <a th:href="@{/kakuge}">格ゲー読みあい</a>
+    <a th:href="@{/combo}">コンボ集</a>
+    <a th:href="@{/buttontest}">ボタンテスト</a>
+    <a th:href="@{/tmptest}">一時的な試験</a>
+
+</body>
+</html>
