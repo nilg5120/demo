@@ -10,3 +10,11 @@ p {
     width: 15px;  /* 幅を100ピクセルに設定 */
     height: 15px;  /* 高さを自動調整 */
 }
+
+th.asc::after {
+    content: " ⬆";
+  }
+  
+  th.desc::after {
+    content: " ⬇";
+  }

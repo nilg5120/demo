@@ -132,7 +132,6 @@ function convertTextToImage() {
             { key: /7/gi, value: '<img src="image/7.png" alt="7" class="icon"/>' },
             { key: /8/gi, value: '<img src="image/8.png" alt="8" class="icon"/>' },
             { key: /9/gi, value: '<img src="image/9.png" alt="9" class="icon"/>' },
-            // 他のパターンも同様に追加
         ];
 
         let updatedHTML = element.textContent;
@@ -157,3 +156,29 @@ function convertImageToText() {
         });
     });
 }
+
+//ソート機能
+function sortTable(n, isNumeric = false) {
+    const table = document.querySelector('table');
+    let rows = Array.from(table.querySelectorAll('tbody tr'));
+    const headerCell = table.querySelector('th:nth-child(' + (n + 1) + ')');
+    const isSortedAsc = headerCell.classList.contains('asc');
+  
+    rows.sort((a, b) => {
+      const aCellValue = isNumeric
+        ? parseFloat(a.querySelectorAll('td')[n].textContent)
+        : a.querySelectorAll('td')[n].textContent.toLowerCase();
+      const bCellValue = isNumeric
+        ? parseFloat(b.querySelectorAll('td')[n].textContent)
+        : b.querySelectorAll('td')[n].textContent.toLowerCase();
+  
+      if (aCellValue < bCellValue) return isSortedAsc ? -1 : 1;
+      if (aCellValue > bCellValue) return isSortedAsc ? 1 : -1;
+      return 0;
+    });
+  
+    Array.from(table.querySelectorAll('th')).forEach(th => th.classList.remove('asc', 'desc'));
+    headerCell.classList.add(isSortedAsc ? 'desc' : 'asc');
+  
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+  }
