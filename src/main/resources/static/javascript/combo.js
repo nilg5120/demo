@@ -116,7 +116,7 @@ function clickButton(row, button) {
 //テキストを画像に変換する
 function convertTextToImage() {
     console.log('convertTextToImage was called');
-    document.querySelectorAll('.editable').forEach((element) => {
+    document.querySelectorAll('.editable[data-name="input"]').forEach((element) => {
         const patterns = [
             { key: /HK/gi, value: '<img src="image/HK.png" alt="HK" class="icon"/>' },
             { key: /HP/gi, value: '<img src="image/HP.png" alt="HP" class="icon"/>' },
@@ -124,6 +124,14 @@ function convertTextToImage() {
             { key: /LP/gi, value: '<img src="image/LP.png" alt="LP" class="icon"/>' },
             { key: /MK/gi, value: '<img src="image/MK.png" alt="MK" class="icon"/>' },
             { key: /MP/gi, value: '<img src="image/MP.png" alt="MP" class="icon"/>' },
+            { key: /1/gi, value: '<img src="image/1.png" alt="1" class="icon"/>' },
+            { key: /2/gi, value: '<img src="image/2.png" alt="2" class="icon"/>' },
+            { key: /3/gi, value: '<img src="image/3.png" alt="3" class="icon"/>' },
+            { key: /4/gi, value: '<img src="image/4.png" alt="4" class="icon"/>' },
+            { key: /6/gi, value: '<img src="image/6.png" alt="6" class="icon"/>' },
+            { key: /7/gi, value: '<img src="image/7.png" alt="7" class="icon"/>' },
+            { key: /8/gi, value: '<img src="image/8.png" alt="8" class="icon"/>' },
+            { key: /9/gi, value: '<img src="image/9.png" alt="9" class="icon"/>' },
             // 他のパターンも同様に追加
         ];
 
