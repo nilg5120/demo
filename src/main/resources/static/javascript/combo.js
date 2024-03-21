@@ -182,3 +182,24 @@ function sortTable(n, isNumeric = false) {
   
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
   }
+
+
+function searchCombos() {
+  const searchInput = document.getElementById('search');
+  const searchTerm = searchInput.value.toLowerCase();
+  const tableBody = document.querySelector('table > tbody');
+  const comboRows = Array.from(tableBody.getElementsByTagName('tr'));
+
+  for (let i = 0; i < comboRows.length; i++) {
+    const row = comboRows[i];
+    const name = row.querySelector('[data-name="name"]').textContent.toLowerCase();
+    const input = row.querySelector('[data-name="input"]').textContent.toLowerCase();
+    const explain = row.querySelector('[data-name="explain"]').textContent.toLowerCase();
+
+    if (name.includes(searchTerm) || input.includes(searchTerm) || explain.includes(searchTerm)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  }
+}
