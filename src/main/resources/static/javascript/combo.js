@@ -20,6 +20,7 @@ function deleteCombo(comboId) {
     }
 }
 
+//編集ボタンを押したときの処理
 function clickButton(row, button) {
     if (button.textContent === '編集') {
         console.log(row+'clickButtonが押されました');
