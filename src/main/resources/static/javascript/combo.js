@@ -184,7 +184,7 @@ function sortTable(n, isNumeric = false) {
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
   }
 
-
+//検索機能
 function searchCombos() {
   const searchInput = document.getElementById('search');
   const searchTerm = searchInput.value.toLowerCase();
@@ -203,4 +203,11 @@ function searchCombos() {
       row.style.display = 'none';
     }
   }
+}
+
+function showForm() {
+    // "addFormRow" というIDを持つ tbody 要素を取得
+    var formRow = document.getElementById('addFormRow');
+    // この tbody 要素の display スタイルを変更してフォームを表示
+    formRow.style.display = 'table-row-group';
 }
