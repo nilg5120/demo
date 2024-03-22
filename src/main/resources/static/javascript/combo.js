@@ -115,7 +115,7 @@ function clickButton(row, button) {
 
 //テキストを画像に変換する
 function convertTextToImage() {
-    console.log('convertTextToImage was called');
+    //console.log('convertTextToImage was called');
     document.querySelectorAll('.editable[data-name="input"]').forEach((element) => {
         const patterns = [
             { key: /HK/gi, value: '<img src="image/HK.png" alt="HK" class="icon"/>' },
