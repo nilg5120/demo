@@ -205,9 +205,63 @@ function searchCombos() {
   }
 }
 
+//追加フォームを表示
 function showForm() {
     // "addFormRow" というIDを持つ tbody 要素を取得
     var formRow = document.getElementById('addFormRow');
     // この tbody 要素の display スタイルを変更してフォームを表示
     formRow.style.display = 'table-row-group';
+}
+
+//追加フォームの保存ボタンを押したときの処理
+function addCombo() {
+
+    console.log('addComboが押されました');
+    // 入力値を取得
+    const name = document.getElementById('name').value;
+    const damage = document.getElementById('damage').value;
+    const input = document.getElementById('input').value;
+    const startup = document.getElementById('startup').value;
+    const usagedg = document.getElementById('usagedg').value;
+    const usagesa = document.getElementById('usagesa').value;
+    const explain = document.getElementById('explain').value;
+
+    console.log(name);
+    console.log(damage);
+    console.log(input);
+    console.log(startup);
+    console.log(usagedg);
+    console.log(usagesa);
+    console.log(explain);
+
+
+    // サーバーに送信
+    fetch('/combos/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup, explain })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('コンボが追加されました');
+            //window.location.reload(); // 成功したらページをリロード
+        } else {
+            // エラーハンドリング
+            response.json().then(data => {
+                console.error('Server Error:', data.message);
+                alert('エラー: ' + data.message); // サーバーからのエラーメッセージを表示
+            });
+            throw new Error('Server response was not ok.');
+        }
+    })
+    .then(data => {
+        alert('コンボが追加されました');
+        console.log('Added Combo:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('追加中にエラーが発生しました');
+    });
 }

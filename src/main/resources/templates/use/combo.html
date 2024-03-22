@@ -22,7 +22,6 @@
 
     <button onclick="showForm()">追加</button>
 
-    <a href="/combos/add" class="add-btn">追加</a>
     <table>
         <thead>
             <tr>
@@ -37,6 +36,8 @@
                 <th>操作</th>
             </tr>
         </thead>
+        <!--追加フォーム-->
+        <form id="addComboForm">
         <tbody id="addFormRow" style="display:none;">
             <tr>
                 <td></td> <!-- IDは自動生成なので入力不要 -->
@@ -47,9 +48,10 @@
                 <td><input type="number" id="usagedg" name="usagedg" placeholder="使用DG"/></td>
                 <td><input type="number" id="usagesa" name="usagesa" placeholder="使用SA"/></td>
                 <td><input type="text" id="explain" name="explain" placeholder="説明"/></td>
-                <td><button type="submit">保存</button></td>
+                <td><button type="submit" onclick="addCombo()">保存</button></td>
             </tr>
         </tbody>
+        </form>
         <tbody>
             <tr th:each="combo : ${combos}">
                 <td th:text="${combo.id}" data-id="${combo.id}"></td>

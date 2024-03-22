@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.JP_combosEntity;
 import com.example.demo.repository.JP_combosRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,14 +21,16 @@ public class JP_combosService {
         return JP_combosRepository.findAll();
     }
 
-    public JP_combosEntity saveJP_combo(JP_combosEntity newMove) {
-        if(newMove == null) {
+    @Transactional
+    public JP_combosEntity saveJP_combo(JP_combosEntity newCombo) {
+        if(newCombo == null) {
             throw new IllegalArgumentException("新しいコンボがnullです");
         }else{
-            return JP_combosRepository.save(newMove);
+            return JP_combosRepository.save(newCombo);
         }
     }
 
+    @Transactional
     public void updateCombo(Long id, JP_combosEntity updatedCombo) {
         if (id == null) {
             throw new IllegalArgumentException("ID must not be null");

@@ -57,17 +57,15 @@ public class JP_combosController {
         }
     }
     
-
-    @GetMapping("/combos/add")
-    public String showAddForm(Model model) {
-        model.addAttribute("combo", new JP_combosEntity());
-        return "use/combo_add";
-    }
-
+    @Transactional
     @PostMapping("/combos/add")
-    public String addCombo(@ModelAttribute JP_combosEntity newCombo) {
-        jp_combosService.saveJP_combo(newCombo); // 新しいコンボを保存する
-        return "redirect:/combo"; // 保存後にコンボ一覧ページにリダイレクトする
+    public ResponseEntity<?> addCombo(@RequestBody JP_combosEntity newCombo) {
+        try {
+            jp_combosService.saveJP_combo(newCombo); // 新しいコンボを保存する
+            return ResponseEntity.ok().build(); // 成功時は200 OKを返す
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("エラーメッセージ");
+        }
     }
 
     @DeleteMapping("/combos/{id}/delete")
