@@ -60,6 +60,8 @@ function clickButton(row, button) {
         const usagedgInput = row.querySelector('[data-name="usagedg"] input');
         const usagesaInput = row.querySelector('[data-name="usagesa"] input');
         const explainInput = row.querySelector('[data-name="explain"] input');
+
+        
         
         if (!nameInput || !damageInput || !inputInput || !startupInput || !usagedgInput || !usagesaInput || !explainInput) {
             console.error('One or more input elements could not be found');
@@ -75,6 +77,8 @@ function clickButton(row, button) {
         const usagedg = usagedgInput.value;
         const usagesa = usagesaInput.value;
         const explain = explainInput.value;
+
+        validation(input);
     
         // サーバーに送信
         fetch(`/combos/${comboId}/edit`, {
@@ -234,6 +238,7 @@ function addCombo() {
     console.log(usagesa);
     console.log(explain);
 
+    validation(input);
 
     // サーバーに送信
     fetch('/combos/add', {
@@ -264,4 +269,13 @@ function addCombo() {
         console.error('Error:', error);
         alert('追加中にエラーが発生しました');
     });
+}
+
+function validation(input) {
+    // 入力が空白かどうかチェック
+    if (!input || input.trim() === '') {
+        alert('入力を指定してください');
+        return false; // 入力が空白の場合は false を返す
+    }
+    return true; // 入力が空白でない場合は true を返す
 }

@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.JP_combosEntity;
 import com.example.demo.service.JP_combosService;
+
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class JP_combosController {
     
     @Transactional
     @PostMapping("/combos/add")
-    public ResponseEntity<?> addCombo(@RequestBody JP_combosEntity newCombo) {
+    public ResponseEntity<?> addCombo(@Valid @RequestBody JP_combosEntity newCombo) {
         try {
             jp_combosService.saveJP_combo(newCombo); // 新しいコンボを保存する
             return ResponseEntity.ok().build(); // 成功時は200 OKを返す

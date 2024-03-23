@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "jp_combos")
@@ -18,6 +19,7 @@ public class JP_combosEntity {
 
     private String name;
     private int damage;
+    @NotBlank(message = "入力を指定してください")
     private String input;
     private Integer startup;
     private Integer usagedg;
