@@ -1,9 +1,0 @@
-#log {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    padding: 5px;
-    background-color: rgba(0,0,0,0.7);
-    color: white;
-    border-radius: 5px;
-}

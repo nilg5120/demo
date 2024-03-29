@@ -8,10 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.History;
 import com.example.demo.util.SessionUtils;
 
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class NumberGuessingGameController {

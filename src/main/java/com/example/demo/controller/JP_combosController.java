@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.entity.JP_combosEntity;
 import com.example.demo.service.JP_combosService;
 
-import jakarta.validation.Valid;
-
 import java.util.List;
+
+import javax.validation.Valid;
 
 
 @Controller
