@@ -11,7 +11,8 @@ public class SessionUtils {
     @SuppressWarnings("unchecked")
     public static Optional<List<History>> getHistories(HttpSession session) {
         Object historiesObject = session.getAttribute("histories");
-        if (historiesObject instanceof List<?> temp) {
+        if (historiesObject instanceof List<?>) {
+            List<?> temp = (List<?>) historiesObject;
             if (!temp.isEmpty() && temp.get(0) instanceof History) {
                 return Optional.of((List<History>) historiesObject);
             }

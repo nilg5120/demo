@@ -1,0 +1,4 @@
+runtime: java11
+instance_class: F1
+env_variables:
+  CLOUDBUILD_LOGS_BUCKET: "gs://151544792085"
