@@ -261,14 +261,18 @@ function addCombo() {
             throw new Error('Server response was not ok.');
         }
     })
-    .then(data => {
-        alert('コンボが追加されました');
-        console.log('Added Combo:', data);
-    })
     .catch(error => {
         console.error('Error:', error);
         alert('追加中にエラーが発生しました');
     });
+    // ここでテキストを表示モードに戻す
+    nameInput.parentNode.textContent = name;
+    damageInput.parentNode.textContent = damage;
+    inputInput.parentNode.textContent = input;
+    startupInput.parentNode.textContent = startup;
+    usagedgInput.parentNode.textContent = usagedg;
+    usagesaInput.parentNode.textContent = usagesa;
+    explainInput.parentNode.textContent = explain;
 }
 
 function validation(input) {

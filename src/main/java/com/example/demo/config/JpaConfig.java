@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(basePackages = "com.example.demo.repository")
 public class JpaConfig {
 
-    @SuppressWarnings("null")
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
