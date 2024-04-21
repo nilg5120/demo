@@ -27,6 +27,7 @@ public class JP_combosEntity {
 
     @Column(name = "`explain`") // バッククォートで囲むことで予約語をエスケープ
     private String explain;
+    private String hittype;
 
     // Getters and setters
 
@@ -94,6 +95,14 @@ public class JP_combosEntity {
         this.explain = explain;
     }
 
+    public String getHittype() {
+        return hittype;
+    }
+
+    public void setHittype(String hittype) {
+        this.hittype = hittype;
+    }
+
     // toString method for debugging purposes
 
     @Override
@@ -106,7 +115,8 @@ public class JP_combosEntity {
                 ", startup=" + startup + '\'' +
                 ", explain='" + explain + '\'' +
                 ", usagedg=" + usagedg + '\'' +
-                ", usagesa=" + usagesa +
+                ", usagesa=" + usagesa + '\'' +
+                ", hittype='" + hittype + 
                 '}';
     }
 }
