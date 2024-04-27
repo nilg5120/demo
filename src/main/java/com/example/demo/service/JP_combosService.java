@@ -32,10 +32,14 @@ public class JP_combosService {
 
     @Transactional
     public void updateCombo(Long id, JP_combosEntity updatedCombo) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID must not be null");
-        }else{
+        try {
+            if (id == null) {
+                throw new IllegalArgumentException("ID must not be null");
+            }
+            
             JP_combosEntity combo = JP_combosRepository.findById(id).orElseThrow();
+            
+            // 値のセット
             combo.setName(updatedCombo.getName());
             combo.setDamage(updatedCombo.getDamage());
             combo.setInput(updatedCombo.getInput());
@@ -43,7 +47,12 @@ public class JP_combosService {
             combo.setUsagedg(updatedCombo.getUsagedg());
             combo.setUsagesa(updatedCombo.getUsagesa());
             combo.setExplain(updatedCombo.getExplain());
+            combo.setHittype(updatedCombo.getHittype());
+            System.out.println("Updated combo: " + combo);
             JP_combosRepository.save(combo);
+        } catch (Exception e) {
+            System.err.println("Error updating combo: " + e.getMessage());
+            throw e; // 再スローしてトランザクションのロールバックを誘発
         }
     }
 

@@ -34,6 +34,7 @@ function clickButton(row, button) {
         const usagedgSpan = row.querySelector('[data-name="usagedg"]');
         const usagesaSpan = row.querySelector('[data-name="usagesa"]');
         const explainSpan = row.querySelector('[data-name="explain"]');
+        const hitTypeSpan = row.querySelector('[data-name="hitType"]');
 
         nameSpan.innerHTML = `<input type="text" value="${nameSpan.textContent.trim()}">`;
         damageSpan.innerHTML = `<input type="text" value="${damageSpan.textContent.trim()}">`;
@@ -42,6 +43,7 @@ function clickButton(row, button) {
         usagedgSpan.innerHTML = `<input type="text" value="${usagedgSpan.textContent.trim()}">`;
         usagesaSpan.innerHTML = `<input type="text" value="${usagesaSpan.textContent.trim()}">`;
         explainSpan.innerHTML = `<input type="text" value="${explainSpan.textContent.trim()}">`;
+        hitTypeSpan.innerHTML = `<select type="text" id="hitType" name="hitType" placeholder="カウンター状況"><option value="0">ノーマルヒット</option><option value="1">カウンター</option><option value="2">パニッシュカウンター</option></select>`;
 
 
         button.textContent = '保存';
@@ -60,12 +62,11 @@ function clickButton(row, button) {
         const usagedgInput = row.querySelector('[data-name="usagedg"] input');
         const usagesaInput = row.querySelector('[data-name="usagesa"] input');
         const explainInput = row.querySelector('[data-name="explain"] input');
+        const hitTypeSelect = row.querySelector('[data-name="hitType"] select');
 
-        
-        
-        if (!nameInput || !damageInput || !inputInput || !startupInput || !usagedgInput || !usagesaInput || !explainInput) {
-            console.error('One or more input elements could not be found');
-            return;
+        if (!nameInput || !damageInput || !inputInput || !startupInput || !usagedgInput || !usagesaInput || !explainInput || !hitTypeSelect) {
+          console.error('One or more input elements could not be found');
+          return;
         }
         
         // 入力値を変数に格納
@@ -77,7 +78,19 @@ function clickButton(row, button) {
         const usagedg = usagedgInput.value;
         const usagesa = usagesaInput.value;
         const explain = explainInput.value;
+        const hitType = hitTypeSelect.value;
 
+        console.log('リクエストボディ:', JSON.stringify({
+            id,
+            name,
+            damage,
+            input,
+            usagedg,
+            usagesa,
+            startup,
+            explain,
+            hitType
+        }));
         validation(input);
     
         // サーバーに送信
@@ -86,7 +99,7 @@ function clickButton(row, button) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, name, damage, input, usagedg, usagesa, startup , explain})
+            body: JSON.stringify({ id, name, damage, input, usagedg, usagesa, startup , explain, hitType})
         })
         .then(response => {
             if (response.ok) {
@@ -100,6 +113,7 @@ function clickButton(row, button) {
                 usagedgInput.parentNode.textContent = usagedg;
                 usagesaInput.parentNode.textContent = usagesa;
                 explainInput.parentNode.textContent = explain;
+                hitTypeSelect.parentNode.textContent = hitType;
     
                 // その他のコード
 
@@ -123,12 +137,12 @@ function convertTextToImage() {
     //console.log('convertTextToImage was called');
     document.querySelectorAll('.editable[data-name="input"]').forEach((element) => {
         const patterns = [
-            { key: /HK/gi, value: '<img src="image/HK.png" alt="HK" class="icon"/>' },
-            { key: /HP/gi, value: '<img src="image/HP.png" alt="HP" class="icon"/>' },
-            { key: /LK/gi, value: '<img src="image/LK.png" alt="LK" class="icon"/>' },
             { key: /LP/gi, value: '<img src="image/LP.png" alt="LP" class="icon"/>' },
-            { key: /MK/gi, value: '<img src="image/MK.png" alt="MK" class="icon"/>' },
+            { key: /LK/gi, value: '<img src="image/LK.png" alt="LK" class="icon"/>' },
             { key: /MP/gi, value: '<img src="image/MP.png" alt="MP" class="icon"/>' },
+            { key: /MK/gi, value: '<img src="image/MK.png" alt="MK" class="icon"/>' },
+            { key: /HP/gi, value: '<img src="image/HP.png" alt="HP" class="icon"/>' },
+            { key: /HK/gi, value: '<img src="image/HK.png" alt="HK" class="icon"/>' },
             { key: /1/gi, value: '<img src="image/1.png" alt="1" class="icon"/>' },
             { key: /2/gi, value: '<img src="image/2.png" alt="2" class="icon"/>' },
             { key: /3/gi, value: '<img src="image/3.png" alt="3" class="icon"/>' },
@@ -137,6 +151,7 @@ function convertTextToImage() {
             { key: /7/gi, value: '<img src="image/7.png" alt="7" class="icon"/>' },
             { key: /8/gi, value: '<img src="image/8.png" alt="8" class="icon"/>' },
             { key: /9/gi, value: '<img src="image/9.png" alt="9" class="icon"/>' },
+            { key: /theow/gi, value: '<img src="image/theow.png" alt="theow" class="icon"/>' },
         ];
 
         let updatedHTML = element.textContent;
@@ -229,6 +244,7 @@ function addCombo() {
     const usagedg = document.getElementById('usagedg').value;
     const usagesa = document.getElementById('usagesa').value;
     const explain = document.getElementById('explain').value;
+    const hitType = document.getElementById('hitType').value;
 
     console.log(name);
     console.log(damage);
@@ -237,6 +253,7 @@ function addCombo() {
     console.log(usagedg);
     console.log(usagesa);
     console.log(explain);
+    console.log(hitType);
 
     validation(input);
 
@@ -246,7 +263,7 @@ function addCombo() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup, explain })
+        body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup, explain , hitType})
     })
     .then(response => {
         if (response.ok) {
@@ -273,6 +290,7 @@ function addCombo() {
     usagedgInput.parentNode.textContent = usagedg;
     usagesaInput.parentNode.textContent = usagesa;
     explainInput.parentNode.textContent = explain;
+    hitTypeInput.parentNode.textContent = hitType;
 }
 
 function validation(input) {

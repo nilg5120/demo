@@ -27,7 +27,7 @@ public class JP_combosEntity {
 
     @Column(name = "`explain`") // バッククォートで囲むことで予約語をエスケープ
     private String explain;
-    private String hittype;
+    private Integer hittype;
 
     // Getters and setters
 
@@ -95,11 +95,11 @@ public class JP_combosEntity {
         this.explain = explain;
     }
 
-    public String getHittype() {
+    public Integer getHittype() {
         return hittype;
     }
 
-    public void setHittype(String hittype) {
+    public void setHittype(Integer hittype) {
         this.hittype = hittype;
     }
 
