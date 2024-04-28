@@ -53,7 +53,7 @@
                 <td><input type="number" id="usagesa" name="usagesa" placeholder="使用SA"/></td>
                 <td><input type="text" id="explain" name="explain" placeholder="説明"/></td>
                 <td>
-                    <select id="hitType" name="hitType">
+                    <select id="hittype" name="hittype">
                         <option value="0">ノーマルヒット</option>
                         <option value="1">カウンター</option>
                         <option value="2">パニッシュカウンター</option>
@@ -75,7 +75,7 @@
                 <td><span class="editable" data-name="usagesa" th:data-id="${combo.id}" th:text="${combo.usagesa}"></span></td>
                 <td><span class="editable" data-name="explain" th:data-id="${combo.id}" th:text="${combo.explain}"></span></td>
                 <td>
-                    <span class="editable" data-name="hitType" th:data-id="${combo.id}">
+                    <span class="editable" data-name="hittype" th:data-id="${combo.id}">
                         <span th:switch="${combo.hittype}">
                             <span th:case="0">ノーマルヒット</span>
                             <span th:case="1">カウンター</span>

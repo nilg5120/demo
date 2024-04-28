@@ -99,8 +99,8 @@ public class JP_combosEntity {
         return hittype;
     }
 
-    public void setHittype(Integer hittype) {
-        this.hittype = hittype;
+    public void setHittype(Integer hitType) {
+        this.hittype = hitType;
     }
 
     // toString method for debugging purposes

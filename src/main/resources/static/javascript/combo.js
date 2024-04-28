@@ -34,7 +34,7 @@ function clickButton(row, button) {
         const usagedgSpan = row.querySelector('[data-name="usagedg"]');
         const usagesaSpan = row.querySelector('[data-name="usagesa"]');
         const explainSpan = row.querySelector('[data-name="explain"]');
-        const hitTypeSpan = row.querySelector('[data-name="hitType"]');
+        const hittypeSpan = row.querySelector('[data-name="hittype"]');
 
         nameSpan.innerHTML = `<input type="text" value="${nameSpan.textContent.trim()}">`;
         damageSpan.innerHTML = `<input type="text" value="${damageSpan.textContent.trim()}">`;
@@ -43,7 +43,7 @@ function clickButton(row, button) {
         usagedgSpan.innerHTML = `<input type="text" value="${usagedgSpan.textContent.trim()}">`;
         usagesaSpan.innerHTML = `<input type="text" value="${usagesaSpan.textContent.trim()}">`;
         explainSpan.innerHTML = `<input type="text" value="${explainSpan.textContent.trim()}">`;
-        hitTypeSpan.innerHTML = `<select type="text" id="hitType" name="hitType" placeholder="カウンター状況"><option value="0">ノーマルヒット</option><option value="1">カウンター</option><option value="2">パニッシュカウンター</option></select>`;
+        hittypeSpan.innerHTML = `<select type="text" id="hittype" name="hittype" placeholder="カウンター状況"><option value="0">ノーマルヒット</option><option value="1">カウンター</option><option value="2">パニッシュカウンター</option></select>`;
 
 
         button.textContent = '保存';
@@ -62,9 +62,9 @@ function clickButton(row, button) {
         const usagedgInput = row.querySelector('[data-name="usagedg"] input');
         const usagesaInput = row.querySelector('[data-name="usagesa"] input');
         const explainInput = row.querySelector('[data-name="explain"] input');
-        const hitTypeSelect = row.querySelector('[data-name="hitType"] select');
+        const hittypeSelect = row.querySelector('[data-name="hittype"] select');
 
-        if (!nameInput || !damageInput || !inputInput || !startupInput || !usagedgInput || !usagesaInput || !explainInput || !hitTypeSelect) {
+        if (!nameInput || !damageInput || !inputInput || !startupInput || !usagedgInput || !usagesaInput || !explainInput || !hittypeSelect) {
           console.error('One or more input elements could not be found');
           return;
         }
@@ -78,7 +78,7 @@ function clickButton(row, button) {
         const usagedg = usagedgInput.value;
         const usagesa = usagesaInput.value;
         const explain = explainInput.value;
-        const hitType = hitTypeSelect.value;
+        const hittype = hittypeSelect.value;
 
         console.log('リクエストボディ:', JSON.stringify({
             id,
@@ -89,7 +89,7 @@ function clickButton(row, button) {
             usagesa,
             startup,
             explain,
-            hitType
+            hittype
         }));
         validation(input);
     
@@ -99,7 +99,7 @@ function clickButton(row, button) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, name, damage, input, usagedg, usagesa, startup , explain, hitType})
+            body: JSON.stringify({ id, name, damage, input, usagedg, usagesa, startup , explain, hittype})
         })
         .then(response => {
             if (response.ok) {
@@ -113,7 +113,7 @@ function clickButton(row, button) {
                 usagedgInput.parentNode.textContent = usagedg;
                 usagesaInput.parentNode.textContent = usagesa;
                 explainInput.parentNode.textContent = explain;
-                hitTypeSelect.parentNode.textContent = hitType;
+                hittypeSelect.parentNode.textContent = hittype;
     
                 // その他のコード
 
@@ -244,7 +244,7 @@ function addCombo() {
     const usagedg = document.getElementById('usagedg').value;
     const usagesa = document.getElementById('usagesa').value;
     const explain = document.getElementById('explain').value;
-    const hitType = document.getElementById('hitType').value;
+    const hittype = document.getElementById('hittype').value;
 
     console.log(name);
     console.log(damage);
@@ -253,7 +253,7 @@ function addCombo() {
     console.log(usagedg);
     console.log(usagesa);
     console.log(explain);
-    console.log(hitType);
+    console.log(hittype);
 
     validation(input);
 
@@ -263,7 +263,7 @@ function addCombo() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup, explain , hitType})
+        body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup, explain , hittype})
     })
     .then(response => {
         if (response.ok) {
@@ -290,7 +290,7 @@ function addCombo() {
     usagedgInput.parentNode.textContent = usagedg;
     usagesaInput.parentNode.textContent = usagesa;
     explainInput.parentNode.textContent = explain;
-    hitTypeInput.parentNode.textContent = hitType;
+    hittypeInput.parentNode.textContent = hittype;
 }
 
 function validation(input) {

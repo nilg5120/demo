@@ -14,6 +14,12 @@ public class JP_combosRepositoryTest {
     @Autowired
     private JP_combosRepository jp_combosRepository;
 
+    private Long savedEntityId;
+
+    //JP_combosEntityクラスをインスタンス化して初期データを保存します
+    //@BeforeEach：各テストメソッドの前に実行されるメソッド
+    // 保存されたエンティティのIDを保持するフィールド
+
     @BeforeEach
     public void setup() {
         JP_combosEntity combo = new JP_combosEntity();
@@ -26,16 +32,21 @@ public class JP_combosRepositoryTest {
         combo.setExplain("説明");
         combo.setHittype(0);
         // 必要であれば他のフィールドも設定
-        jp_combosRepository.save(combo);
+        JP_combosEntity savedEntity = jp_combosRepository.save(combo);
+        savedEntityId = savedEntity.getId(); // 保存されたエンティティのIDを保存
     }
-
+    
     @Test
     public void testFindById() {
         // 保存したエンティティを検索
-        JP_combosEntity foundEntity = jp_combosRepository.findById(1L).orElse(null);
+        JP_combosEntity foundEntity = jp_combosRepository.findById(savedEntityId).orElse(null);
         assertThat(foundEntity).isNotNull();
-        // 他のアサーションを追加して、検索したエンティティの状態を確認します
+        assertThat(foundEntity.getName()).isEqualTo("コンボ");
+        assertThat(foundEntity.getDamage()).isEqualTo(0);
+        assertThat(foundEntity.getInput()).isEqualTo("入力");
+        // 他のフィールドについても検証する
     }
+    
 
     // 他のテストケースを追加...
 }
