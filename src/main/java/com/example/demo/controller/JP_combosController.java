@@ -51,8 +51,6 @@ public class JP_combosController {
     @PostMapping("/combos/{id}/edit")
     public ResponseEntity<?> updateCombo(@PathVariable("id") Long id, @RequestBody JP_combosEntity updatedCombo) {
         try {
-            //System.out.println(updatedCombo.getHittype()); 
-            System.out.println(updatedCombo);
             jp_combosService.updateCombo(id, updatedCombo); // コンボを更新する
             return ResponseEntity.ok().build(); // 成功時は200 OKを返す
         } catch (Exception e) {
