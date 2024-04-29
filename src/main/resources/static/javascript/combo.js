@@ -1,3 +1,4 @@
+let currentEditingRow = null; // 現在編集中の行を追跡する変数
 // DOMが完全に読み込まれるのを待ってから、以下のコードを実行します。
 window.addEventListener('DOMContentLoaded', (event) => {
     // ここで 'convertTextToImage' 関数が呼び出されます。この関数はスクリプトのどこかに定義する必要があります。
@@ -35,6 +36,13 @@ function deleteCombo(comboId) {
 function clickButton(row, button) {
     // ボタンのテキストが '編集' の場合、編集モードに入る
     if (button.textContent === '編集') {
+
+        console.log('currentEditingRow  '+currentEditingRow);
+        if (currentEditingRow && currentEditingRow !== row) {
+            cancelEdit(currentEditingRow);
+        }
+        currentEditingRow = row;
+
         // 編集が始まったことをコンソールにログ出力
         console.log(row + 'clickButtonが押されました');
 
@@ -284,4 +292,30 @@ function addCombo() {
     usagesaInput.parentNode.textContent = usagesa;
     explainInput.parentNode.textContent = explain;
     hittypeInput.parentNode.textContent = hittype;
+}
+
+function cancelEdit(row) {
+    // 編集をキャンセルするロジック
+    //入力フィールドを元のテキストに戻す
+    const nameInput = row.querySelector('[data-name="name"] input');
+    const damageInput = row.querySelector('[data-name="damage"] input');
+    const inputInput = row.querySelector('[data-name="input"] input');
+    const startupInput = row.querySelector('[data-name="startup"] input');
+    const usagedgInput = row.querySelector('[data-name="usagedg"] input');
+    const usagesaInput = row.querySelector('[data-name="usagesa"] input');
+    const explainInput = row.querySelector('[data-name="explain"] input');
+    const hittypeInput = row.querySelector('[data-name="hittype"] select');
+
+    nameInput.parentNode.textContent = nameInput.value;
+    damageInput.parentNode.textContent = damageInput.value;
+    inputInput.parentNode.textContent = inputInput.value;
+    startupInput.parentNode.textContent = startupInput.value;
+    usagedgInput.parentNode.textContent = usagedgInput.value;
+    usagesaInput.parentNode.textContent = usagesaInput.value;
+    explainInput.parentNode.textContent = explainInput.value;
+    hittypeInput.parentNode.textContent = hittypeInput.options[hittypeInput.selectedIndex].text;
+
+    const editButton = row.querySelector('.save-btn');
+    editButton.textContent = '編集';
+    editButton.classList.replace('save-btn', 'edit-btn');
 }
