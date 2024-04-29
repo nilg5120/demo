@@ -78,9 +78,6 @@ function clickButton(row, button) {
         const explainInput = row.querySelector('[data-name="explain"] input');
         const hittypeSelect = row.querySelector('[data-name="hittype"] select');
 
-        // 入力値の検証処理を行う
-        validation(inputInput.value);
-
         // 入力値を元にサーバーへPOSTリクエストを送信
         fetch(`/combos/${comboId}/edit`, {
             method: 'POST',
@@ -253,8 +250,6 @@ function addCombo() {
     console.log(explain);
     console.log(hittype);
 
-    validation(input);
-
     // サーバーに送信
     fetch('/combos/add', {
         method: 'POST',
@@ -289,13 +284,4 @@ function addCombo() {
     usagesaInput.parentNode.textContent = usagesa;
     explainInput.parentNode.textContent = explain;
     hittypeInput.parentNode.textContent = hittype;
-}
-
-function validation(input) {
-    // 入力が空白かどうかチェック
-    if (!input || input.trim() === '') {
-        alert('入力を指定してください');
-        return false; // 入力が空白の場合は false を返す
-    }
-    return true; // 入力が空白でない場合は true を返す
 }

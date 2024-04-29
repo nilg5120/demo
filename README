@@ -1,1 +1,22 @@
-gittest
+システム要件
+Java バージョン: JDK 11
+Spring Boot バージョン: 2.7.11
+主要な依存関係
+Spring Boot スターター:
+spring-boot-starter-data-rest：RESTfulサービスを簡単に構築するためのもの。
+spring-boot-starter-validation：バリデーション制約を適用するためのもの。
+spring-boot-starter-web：Webアプリケーションを作成するためのもの。
+spring-boot-starter-data-jpa：JPAを使用したデータベースアクセスのためのもの。
+spring-boot-starter-thymeleaf：サーバーサイドのHTMLレンダリングのためのもの。
+データベースとJPA:
+mysql-connector-java：MySQLデータベースへの接続用。
+h2：開発やテスト時に使用されるインメモリデータベース。
+hibernate-core：JPAプロバイダとしてHibernate ORMを使用。
+開発ツール:
+spring-boot-devtools：自動再起動やライブリロードなどの機能を提供。
+lombok：ボイラープレートコードの削減を助けるライブラリ。
+テスト:
+junit-jupiter：JUnit 5を使用した単体テストと統合テスト。
+spring-boot-starter-test：Spring Bootアプリケーションのテスト用。
+XMLバインディング:
+jaxb-runtime：XMLバインディングを扱うため。
