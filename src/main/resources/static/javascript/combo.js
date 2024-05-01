@@ -180,14 +180,23 @@ function convertImageToText() {
     });
 }
 
-//ソート機能
+// ソート機能の定義
 function sortTable(n, isNumeric = false) {
+    // 'table' セレクタを使用してDOMからテーブル要素を取得
     const table = document.querySelector('table');
+
+    // テーブル内のすべての行を取得し、配列に変換
     let rows = Array.from(table.querySelectorAll('tbody tr'));
+
+    // n番目の列に対応するヘッダセルを取得
     const headerCell = table.querySelector('th:nth-child(' + (n + 1) + ')');
+
+    // 既に昇順でソートされているかどうかをクラス名から判断
     const isSortedAsc = headerCell.classList.contains('asc');
   
+    // 行を値に基づいてソートするロジック
     rows.sort((a, b) => {
+      // n番目の列の値を取得。数値としてソートするかどうかに応じてパース
       const aCellValue = isNumeric
         ? parseFloat(a.querySelectorAll('td')[n].textContent)
         : a.querySelectorAll('td')[n].textContent.toLowerCase();
@@ -195,16 +204,21 @@ function sortTable(n, isNumeric = false) {
         ? parseFloat(b.querySelectorAll('td')[n].textContent)
         : b.querySelectorAll('td')[n].textContent.toLowerCase();
   
+      // 値を比較して、必要に応じて順序を反転
       if (aCellValue < bCellValue) return isSortedAsc ? -1 : 1;
       if (aCellValue > bCellValue) return isSortedAsc ? 1 : -1;
       return 0;
     });
   
+    // すべてのヘッダセルのソートクラスをクリア
     Array.from(table.querySelectorAll('th')).forEach(th => th.classList.remove('asc', 'desc'));
+    // 現在の列のヘッダに新しいソート方向のクラスを追加
     headerCell.classList.add(isSortedAsc ? 'desc' : 'asc');
   
+    // ソートされた行をテーブルに再挿入
     rows.forEach(row => table.querySelector('tbody').appendChild(row));
-  }
+}
+
 
 //検索機能
 function searchCombos() {

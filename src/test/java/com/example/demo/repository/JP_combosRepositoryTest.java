@@ -44,9 +44,11 @@ public class JP_combosRepositoryTest {
         assertThat(foundEntity.getName()).isEqualTo("コンボ");
         assertThat(foundEntity.getDamage()).isEqualTo(0);
         assertThat(foundEntity.getInput()).isEqualTo("入力");
-        // 他のフィールドについても検証する
-    }
-    
+        assertThat(foundEntity.getStartup()).isEqualTo(0);
+        assertThat(foundEntity.getUsagedg()).isEqualTo(0);
+        assertThat(foundEntity.getUsagesa()).isEqualTo(0);
+        assertThat(foundEntity.getExplain()).isEqualTo("説明");
+        assertThat(foundEntity.getHittype()).isEqualTo(0);
 
-    // 他のテストケースを追加...
+    }
 }
