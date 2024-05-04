@@ -1,7 +1,6 @@
 let currentEditingRow = null; // 現在編集中の行を追跡する変数
 // DOMが完全に読み込まれるのを待ってから、以下のコードを実行します。
 window.addEventListener('DOMContentLoaded', (event) => {
-    // ここで 'convertTextToImage' 関数が呼び出されます。この関数はスクリプトのどこかに定義する必要があります。
     // 特定のクラスを持つテキスト要素を画像に変換することを意図しているようです。
     convertTextToImage();
 });
@@ -21,13 +20,13 @@ function deleteCombo(comboId) {
                 window.location.reload();
             } else {
                 // 削除操作が失敗した場合、ユーザーに警告します。
-                alert('削除に失敗しました。'); // メッセージは「削除に失敗しました。」と言っています。
+                alert('削除に失敗しました。');
             }
         })
         .catch(error => {
             // fetch操作中に発生したエラーをコンソールに記録します。
             console.error('Error:', error);
-            alert('通信エラーが発生しました。'); // 通信エラーの際のアラートを追加しています。
+            alert('通信エラーが発生しました。');
         });
     }
 }

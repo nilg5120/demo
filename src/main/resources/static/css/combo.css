@@ -18,3 +18,20 @@ th.asc::after {
   th.desc::after {
     content: " ⬇";
   }
+
+.header {
+    background-color: #f1f1f1;
+    padding: 5px;
+    text-align: center;
+    font-size: 15px;
+    color: black;
+}
+
+/* 行の下に罫線を追加する */
+.table-row {
+    border-bottom: 1px solid gray;
+}
+
+table {
+    border-collapse: collapse;
+}
