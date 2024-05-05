@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>コンボ集</title>
@@ -8,6 +9,7 @@
     <link rel="icon" href="/image/smartphone_happy_tereru.png" type="image/png">
 
 </head>
+
 <body>
 
     <h1>コンボ集テスト</h1>
@@ -22,70 +24,79 @@
     </form>
 
     <button onclick="showForm()">追加</button>
-
-    <table>
-        <caption>コンボ詳細一覧</caption>
-        <thead>
-            <tr>
-                <th class="header" onclick="sortTable(0)">ID</th>
-                <th class="header" onclick="sortTable(1)">名前</th>
-                <th class="header" onclick="sortTable(2)">ダメージ</th>
-                <th class="header" >入力</th>
-                <th class="header" onclick="sortTable(3)">発生</th>
-                <th class="header" onclick="sortTable(4)">使用DG</th>
-                <th class="header" onclick="sortTable(5)">使用SA</th>
-                <th class="header" >説明</th>
-                <th class="header" >カウンター状況</th>
-            </tr>
-        </thead>
-        <!--追加フォーム-->
-        <form id="addComboForm">
-            <tbody id="addFormRow" style="display:none;">
-                <tr class="table-row">
-                    <td></td> <!-- IDは自動生成なので入力不要 -->
-                    <td><input type="text" id="name" name="name" placeholder="名前"/></td>
-                    <td><input type="number" id="damage" name="damage" placeholder="ダメージ"/></td>
-                    <td><input type="text" id="input" name="input" placeholder="入力"/></td>
-                    <td><input type="number" id="startup" name="startup" placeholder="発生"/></td>
-                    <td><input type="number" id="usagedg" name="usagedg" placeholder="使用DG"/></td>
-                    <td><input type="number" id="usagesa" name="usagesa" placeholder="使用SA"/></td>
-                    <td><input type="text" id="explain" name="explain" placeholder="説明"/></td>
-                    <td>
-                        <select id="hittype" name="hittype">
-                            <option value="0">ノーマルヒット</option>
-                            <option value="1">カウンター</option>
-                            <option value="2">パニッシュカウンター</option>
-                        </select>
-                    </td>
-                    <button type="submit" onclick="addCombo()">保存</button>
-                </tr>
-            </tbody>
-        </form>
-        <tbody>
-            <tr class="table-row" th:each="combo : ${combos}">
-                <td th:text="${combo.id}" data-id="${combo.id}"></td>
-                <td><span class="editable" data-name="name" th:data-id="${combo.id}" th:text="${combo.name}"></span></td>
-                <td><span class="editable" data-name="damage" th:data-id="${combo.id}" th:text="${combo.damage}"></span></td>
-                <td><span class="editable" data-name="input" th:data-id="${combo.id}" th:text="${combo.input}"></span></td>
-                <td><span class="editable" data-name="startup" th:data-id="${combo.id}" th:text="${combo.startup}"></span></td>
-                <td><span class="editable" data-name="usagedg" th:data-id="${combo.id}" th:text="${combo.usagedg}"></span></td>
-                <td><span class="editable" data-name="usagesa" th:data-id="${combo.id}" th:text="${combo.usagesa}"></span></td>
-                <td><span class="editable" data-name="explain" th:data-id="${combo.id}" th:text="${combo.explain}"></span></td>
+    <!--追加フォーム-->
+    <form id="addComboForm">
+        <tbody id="addFormRow" style="display:none;">
+            <tr class="table-row">
+                <td></td> <!-- IDは自動生成なので入力不要 -->
+                <td><input class="addComboForm" type="text" id="name" name="name" placeholder="名前" /></td>
+                <td><input class="addComboForm" type="number" id="damage" name="damage" placeholder="ダメージ" /></td>
+                <td><input class="addComboForm" type="text" id="input" name="input" placeholder="入力" /></td>
+                <td><input class="addComboForm" type="number" id="startup" name="startup" placeholder="発生" /></td>
+                <td><input class="addComboForm" type="number" id="usagedg" name="usagedg" placeholder="使用DG" /></td>
+                <td><input class="addComboForm" type="number" id="usagesa" name="usagesa" placeholder="使用SA" /></td>
+                <td><input class="addComboForm" type="text" id="explain" name="explain" placeholder="説明" /></td>
                 <td>
-                    <span class="editable" data-name="hittype" th:data-id="${combo.id}">
-                        <span th:switch="${combo.hittype}">
-                            <span th:case="0">ノーマルヒット</span>
-                            <span th:case="1">カウンター</span>
-                            <span th:case="2">パニッシュカウンター</span>
-                        </span>
-                    </span>
+                    <select class="addComboForm" id="hittype" name="hittype">
+                        <option value="0">ノーマルヒット</option>
+                        <option value="1">カウンター</option>
+                        <option value="2">パニッシュカウンター</option>
+                    </select>
                 </td>
-                <td id="buttons-container">
-                    <button class="edit-btn" th:data-id="${combo.id}" onclick="clickButton(this.closest('tr'), this)">編集</button>
-                    <button class="delete-btn" th:data-id="${combo.id}" onclick="deleteCombo(this.getAttribute('data-id'))">削除</button>
-                </td>
+                <button type="submit" onclick="addCombo()">保存</button>
             </tr>
         </tbody>
-    </table>
+    </form>
+    <div class="sortable-table">
+        <table class="tablesorter" id="myTable">
+            <thead>
+                <tr>
+                    <button class="header" onclick="sortTable(0)">ID</button>
+                    <button class="header" onclick="sortTable(1)">名前</button>
+                    <button class="header" onclick="sortTable(2)">ダメージ</button>
+                    <button class="header">入力</button>
+                    <button class="header" onclick="sortTable(3)">発生</button>
+                    <button class="header" onclick="sortTable(4)">使用DG</button>
+                    <button class="header" onclick="sortTable(5)">使用SA</button>
+                    <button class="header">説明</button>
+                    <button class="header">カウンター状況</button>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-row" th:each="combo : ${combos}">
+                    <td th:text="${combo.id}" data-id="${combo.id}"></td>
+                    <td><span class="editable" data-name="name" th:data-id="${combo.id}" th:text="${combo.name}"></span>
+                    </td>
+                    <td><span class="editable" data-name="damage" th:data-id="${combo.id}"
+                            th:text="${combo.damage}"></span> </td>
+                    <td><span class="editable" data-name="input" th:data-id="${combo.id}"
+                            th:text="${combo.input}"></span> </td>
+                    <td><span class="editable" data-name="startup" th:data-id="${combo.id}"
+                            th:text="${combo.startup}"></span></td>
+                    <td><span class="editable" data-name="usagedg" th:data-id="${combo.id}"
+                            th:text="${combo.usagedg}"></span></td>
+                    <td><span class="editable" data-name="usagesa" th:data-id="${combo.id}"
+                            th:text="${combo.usagesa}"></span></td>
+                    <td><span class="editable" data-name="explain" th:data-id="${combo.id}"
+                            th:text="${combo.explain}"></span></td>
+                    <td> <span class="editable" data-name="hittype" th:data-id="${combo.id}">
+                            <span th:switch="${combo.hittype}">
+                                <span th:case="0">ノーマルヒット</span>
+                                <span th:case="1">カウンター</span>
+                                <span th:case="2">パニッシュカウンター</span>
+                            </span>
+                        </span>
+                    </td>
+                    <td id="buttons-container">
+                        <button class="edit-btn" th:data-id="${combo.id}"
+                            onclick="clickButton(this.closest('tr'), this)">編集</button>
+                        <button class="delete-btn" th:data-id="${combo.id}"
+                            onclick="deleteCombo(this.getAttribute('data-id'))">削除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>

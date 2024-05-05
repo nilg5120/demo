@@ -14,20 +14,20 @@ function deleteCombo(comboId) {
         fetch('/combos/' + comboId + '/delete', {
             method: 'DELETE',
         })
-        .then(response => {
-            if (response.ok) {
-                // サーバーから肯定的な応答があった場合、ページをリロードして変更を反映させます。
-                window.location.reload();
-            } else {
-                // 削除操作が失敗した場合、ユーザーに警告します。
-                alert('削除に失敗しました。');
-            }
-        })
-        .catch(error => {
-            // fetch操作中に発生したエラーをコンソールに記録します。
-            console.error('Error:', error);
-            alert('通信エラーが発生しました。');
-        });
+            .then(response => {
+                if (response.ok) {
+                    // サーバーから肯定的な応答があった場合、ページをリロードして変更を反映させます。
+                    window.location.reload();
+                } else {
+                    // 削除操作が失敗した場合、ユーザーに警告します。
+                    alert('削除に失敗しました。');
+                }
+            })
+            .catch(error => {
+                // fetch操作中に発生したエラーをコンソールに記録します。
+                console.error('Error:', error);
+                alert('通信エラーが発生しました。');
+            });
     }
 }
 
@@ -36,7 +36,7 @@ function clickButton(row, button) {
     // ボタンのテキストが '編集' の場合、編集モードに入る
     if (button.textContent === '編集') {
 
-        console.log('currentEditingRow  '+currentEditingRow);
+        console.log('currentEditingRow  ' + currentEditingRow);
         if (currentEditingRow && currentEditingRow !== row) {
             cancelEdit(currentEditingRow);
         }
@@ -98,30 +98,30 @@ function clickButton(row, button) {
                 explain: explainInput.value, hittype: hittypeSelect.value
             })
         })
-        .then(response => {
-            if (response.ok) {
-                alert('コンボが更新されました');
-                // 入力フィールドを通常のテキスト表示に戻す
-                nameInput.parentNode.textContent = nameInput.value;
-                damageInput.parentNode.textContent = damageInput.value;
-                inputInput.parentNode.textContent = inputInput.value;
-                startupInput.parentNode.textContent = startupInput.value;
-                usagedgInput.parentNode.textContent = usagedgInput.value;
-                usagesaInput.parentNode.textContent = usagesaInput.value;
-                explainInput.parentNode.textContent = explainInput.value;
-                hittypeSelect.parentNode.textContent = hittypeSelect.options[hittypeSelect.selectedIndex].text;
+            .then(response => {
+                if (response.ok) {
+                    alert('コンボが更新されました');
+                    // 入力フィールドを通常のテキスト表示に戻す
+                    nameInput.parentNode.textContent = nameInput.value;
+                    damageInput.parentNode.textContent = damageInput.value;
+                    inputInput.parentNode.textContent = inputInput.value;
+                    startupInput.parentNode.textContent = startupInput.value;
+                    usagedgInput.parentNode.textContent = usagedgInput.value;
+                    usagesaInput.parentNode.textContent = usagesaInput.value;
+                    explainInput.parentNode.textContent = explainInput.value;
+                    hittypeSelect.parentNode.textContent = hittypeSelect.options[hittypeSelect.selectedIndex].text;
 
-                // 保存後、再度テキストを画像に変換する処理を呼び出す
-                convertTextToImage();
-            } else {
-                // 保存失敗時のエラーハンドリング
+                    // 保存後、再度テキストを画像に変換する処理を呼び出す
+                    convertTextToImage();
+                } else {
+                    // 保存失敗時のエラーハンドリング
+                    alert('更新中にエラーが発生しました');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
                 alert('更新中にエラーが発生しました');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('更新中にエラーが発生しました');
-        });
+            });
 
         // ボタンのテキストを '編集' に戻し、クラスを 'save-btn' から 'edit-btn' に変更
         button.textContent = '編集';
@@ -135,7 +135,7 @@ function convertTextToImage() {
     //console.log('convertTextToImage was called');
     document.querySelectorAll('.editable[data-name="input"]').forEach((element) => {
         const patterns = [
-            
+
             { key: /LP/gi, value: '<img src="image/LP.png" alt="LP" class="icon"/>' },
             { key: /LK/gi, value: '<img src="image/LK.png" alt="LK" class="icon"/>' },
             { key: /MP/gi, value: '<img src="image/MP.png" alt="MP" class="icon"/>' },
@@ -153,7 +153,7 @@ function convertTextToImage() {
             { key: /throw/gi, value: '<img src="image/throw.png" alt="throw" class="icon"/>' },
             { key: /PP/g, value: '<img src="image/P.png" alt="P" class="icon"/><img src="image/P.png" alt="P" class="icon"/>' },
 
-            
+
         ];
 
         let updatedHTML = element.textContent;
@@ -164,13 +164,41 @@ function convertTextToImage() {
     });
 }
 
+function sortTable(columnIndex) {
+    console.log('sortTableが押されました');
+    let table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("myTable");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[columnIndex];
+            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+            // 数値として比較する
+            if (parseInt(x.innerText) > parseInt(y.innerText)) { // Use innerText instead of innerHTML
+                shouldSwitch = true;
+            }
+            
+            console.log('rows.length'+rows.length+' switching:' + switching + ' i:' + i + ' x:' + x.innerText + ' y:' + y.innerText + ' shouldSwitch:' + shouldSwitch); // Use innerText instead of innerHTML
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                break;
+            }
+        }
+    }
+}
 
 //画像をテキストに変換する
 function convertImageToText() {
     document.querySelectorAll('.editable').forEach((element) => {
         element.querySelectorAll('img').forEach((img) => {
-        // 'alt'属性からテキストを取得し、画像をそのテキストで置き換える
-        const altText = img.getAttribute('alt');
+            // 'alt'属性からテキストを取得し、画像をそのテキストで置き換える
+            const altText = img.getAttribute('alt');
             if (altText) {
                 const textNode = document.createTextNode(altText);
                 img.parentNode.replaceChild(textNode, img);
@@ -179,65 +207,26 @@ function convertImageToText() {
     });
 }
 
-// ソート機能の定義
-function sortTable(n, isNumeric = false) {
-    // 'table' セレクタを使用してDOMからテーブル要素を取得
-    const table = document.querySelector('table');
-
-    // テーブル内のすべての行を取得し、配列に変換
-    let rows = Array.from(table.querySelectorAll('tbody tr'));
-
-    // n番目の列に対応するヘッダセルを取得
-    const headerCell = table.querySelector('th:nth-child(' + (n + 1) + ')');
-
-    // 既に昇順でソートされているかどうかをクラス名から判断
-    const isSortedAsc = headerCell.classList.contains('asc');
-  
-    // 行を値に基づいてソートするロジック
-    rows.sort((a, b) => {
-      // n番目の列の値を取得。数値としてソートするかどうかに応じてパース
-      const aCellValue = isNumeric
-        ? parseFloat(a.querySelectorAll('td')[n].textContent)
-        : a.querySelectorAll('td')[n].textContent.toLowerCase();
-      const bCellValue = isNumeric
-        ? parseFloat(b.querySelectorAll('td')[n].textContent)
-        : b.querySelectorAll('td')[n].textContent.toLowerCase();
-  
-      // 値を比較して、必要に応じて順序を反転
-      if (aCellValue < bCellValue) return isSortedAsc ? -1 : 1;
-      if (aCellValue > bCellValue) return isSortedAsc ? 1 : -1;
-      return 0;
-    });
-  
-    // すべてのヘッダセルのソートクラスをクリア
-    Array.from(table.querySelectorAll('th')).forEach(th => th.classList.remove('asc', 'desc'));
-    // 現在の列のヘッダに新しいソート方向のクラスを追加
-    headerCell.classList.add(isSortedAsc ? 'desc' : 'asc');
-  
-    // ソートされた行をテーブルに再挿入
-    rows.forEach(row => table.querySelector('tbody').appendChild(row));
-}
-
 
 //検索機能
 function searchCombos() {
-  const searchInput = document.getElementById('search');
-  const searchTerm = searchInput.value.toLowerCase();
-  const tableBody = document.querySelector('table > tbody');
-  const comboRows = Array.from(tableBody.getElementsByTagName('tr'));
+    const searchInput = document.getElementById('search');
+    const searchTerm = searchInput.value.toLowerCase();
+    const tableBody = document.querySelector('table > tbody');
+    const comboRows = Array.from(tableBody.getElementsByTagName('tr'));
 
-  for (let i = 0; i < comboRows.length; i++) {
-    const row = comboRows[i];
-    const name = row.querySelector('[data-name="name"]').textContent.toLowerCase();
-    const input = row.querySelector('[data-name="input"]').textContent.toLowerCase();
-    const explain = row.querySelector('[data-name="explain"]').textContent.toLowerCase();
+    for (let i = 0; i < comboRows.length; i++) {
+        const row = comboRows[i];
+        const name = row.querySelector('[data-name="name"]').textContent.toLowerCase();
+        const input = row.querySelector('[data-name="input"]').textContent.toLowerCase();
+        const explain = row.querySelector('[data-name="explain"]').textContent.toLowerCase();
 
-    if (name.includes(searchTerm) || input.includes(searchTerm) || explain.includes(searchTerm)) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
+        if (name.includes(searchTerm) || input.includes(searchTerm) || explain.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
     }
-  }
 }
 
 //追加フォームを表示
@@ -277,25 +266,25 @@ function addCombo() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup, explain , hittype})
+        body: JSON.stringify({ name, damage, input, usagedg, usagesa, startup, explain, hittype })
     })
-    .then(response => {
-        if (response.ok) {
-            alert('コンボが追加されました');
-            //window.location.reload(); // 成功したらページをリロード
-        } else {
-            // エラーハンドリング
-            response.json().then(data => {
-                console.error('Server Error:', data.message);
-                alert('エラー: ' + data.message); // サーバーからのエラーメッセージを表示
-            });
-            throw new Error('Server response was not ok.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('追加中にエラーが発生しました');
-    });
+        .then(response => {
+            if (response.ok) {
+                alert('コンボが追加されました');
+                //window.location.reload(); // 成功したらページをリロード
+            } else {
+                // エラーハンドリング
+                response.json().then(data => {
+                    console.error('Server Error:', data.message);
+                    alert('エラー: ' + data.message); // サーバーからのエラーメッセージを表示
+                });
+                throw new Error('Server response was not ok.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('追加中にエラーが発生しました');
+        });
     // ここでテキストを表示モードに戻す
     nameInput.parentNode.textContent = name;
     damageInput.parentNode.textContent = damage;
