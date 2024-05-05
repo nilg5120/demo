@@ -164,11 +164,20 @@ function convertTextToImage() {
     });
 }
 
+let sortDirections = []; // Add this line to track sort directions for each column
+
 function sortTable(columnIndex) {
     console.log('sortTableが押されました');
     let table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("myTable");
     switching = true;
+    // If sortDirections for this column is undefined, default to ascending
+    if (sortDirections[columnIndex] === undefined) {
+        sortDirections[columnIndex] = true;
+    } else {
+        // If it was previously sorted, reverse the sort direction
+        sortDirections[columnIndex] = !sortDirections[columnIndex];
+    }
     while (switching) {
         switching = false;
         rows = table.rows;
@@ -178,11 +187,11 @@ function sortTable(columnIndex) {
             y = rows[i + 1].getElementsByTagName("td")[columnIndex];
 
             // 数値として比較する
-            if (parseInt(x.innerText) > parseInt(y.innerText)) { // Use innerText instead of innerHTML
+            if (sortDirections[columnIndex] ? parseInt(x.innerText) > parseInt(y.innerText) : parseInt(x.innerText) < parseInt(y.innerText)) {
                 shouldSwitch = true;
             }
             
-            console.log('rows.length'+rows.length+' switching:' + switching + ' i:' + i + ' x:' + x.innerText + ' y:' + y.innerText + ' shouldSwitch:' + shouldSwitch); // Use innerText instead of innerHTML
+            console.log('rows.length'+rows.length+' switching:' + switching + ' i:' + i + ' x:' + x.innerText + ' y:' + y.innerText + ' shouldSwitch:' + shouldSwitch);
 
             if (shouldSwitch) {
                 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
@@ -192,7 +201,6 @@ function sortTable(columnIndex) {
         }
     }
 }
-
 //画像をテキストに変換する
 function convertImageToText() {
     document.querySelectorAll('.editable').forEach((element) => {
