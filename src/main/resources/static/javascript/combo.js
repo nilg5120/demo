@@ -164,43 +164,48 @@ function convertTextToImage() {
     });
 }
 
-let sortDirections = []; // Add this line to track sort directions for each column
+let sortDirections = []; // 各列のソート方向を追跡するための配列
 
 function sortTable(columnIndex) {
-    console.log('sortTableが押されました');
-    let table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("myTable");
-    switching = true;
-    // If sortDirections for this column is undefined, default to ascending
+    console.log('sortTableが押されました'); // デバッグ用のコンソールログ
+    let table, rows, issortnesesary;
+    table = document.getElementById("myTable"); // テーブルを取得
+    issortnesesary = true;
+
+    // 現在の列のソート方向を確認または初期化
     if (sortDirections[columnIndex] === undefined) {
-        sortDirections[columnIndex] = true;
+        sortDirections[columnIndex] = true; // 初めてのソートは昇順
     } else {
-        // If it was previously sorted, reverse the sort direction
-        sortDirections[columnIndex] = !sortDirections[columnIndex];
+        sortDirections[columnIndex] = !sortDirections[columnIndex]; // ソート方向を逆にする
     }
-    while (switching) {
-        switching = false;
-        rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("td")[columnIndex];
-            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+    while (issortnesesary) {
+        issortnesesary = false; // ソートが必要な状態を初期化
+        rows = table.rows; // テーブルの全行を取得
+
+        // 行を比較してソート
+        for (let i = 1; i < (rows.length - 1); i++) {
+            let x, y, shouldSwitch;
+            shouldSwitch = false; // 初期値としてスイッチしない設定
+            x = rows[i].getElementsByTagName("td")[columnIndex]; // 現在のセル
+            y = rows[i + 1].getElementsByTagName("td")[columnIndex]; // 次のセル
 
             // 数値として比較する
             if (sortDirections[columnIndex] ? parseInt(x.innerText) > parseInt(y.innerText) : parseInt(x.innerText) < parseInt(y.innerText)) {
-                shouldSwitch = true;
+                shouldSwitch = true; // ソートが必要な場合はフラグを立てる
             }
-            
-            console.log('rows.length'+rows.length+' switching:' + switching + ' i:' + i + ' x:' + x.innerText + ' y:' + y.innerText + ' shouldSwitch:' + shouldSwitch);
+
+            //console.log('rows.length' + rows.length + ' switching:' + switching + ' i:' + i + ' x:' + x.innerText + ' y:' + y.innerText + ' shouldSwitch:' + shouldSwitch); // デバッグ用のログ
 
             if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                break;
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]); // 行を交換
+                issortnesesary = true; // ソートが続くことを示す
+                break; // 交換が発生した場合はループを終了
             }
         }
     }
 }
+
 //画像をテキストに変換する
 function convertImageToText() {
     document.querySelectorAll('.editable').forEach((element) => {
