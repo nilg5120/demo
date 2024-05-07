@@ -168,9 +168,9 @@ let sortDirections = []; // 各列のソート方向を追跡するための配�
 
 function sortTable(columnIndex) {
     console.log('sortTableが押されました'); // デバッグ用のコンソールログ
-    let table, rows, issortnesesary;
+    let table, rows, isSortNecessary;
     table = document.getElementById("myTable"); // テーブルを取得
-    issortnesesary = true;
+    isSortNecessary = true;
 
     // 現在の列のソート方向を確認または初期化
     if (sortDirections[columnIndex] === undefined) {
@@ -179,27 +179,35 @@ function sortTable(columnIndex) {
         sortDirections[columnIndex] = !sortDirections[columnIndex]; // ソート方向を逆にする
     }
 
-    while (issortnesesary) {
-        issortnesesary = false; // ソートが必要な状態を初期化
+    while (isSortNecessary) {
+        isSortNecessary = false; // ソートが必要な状態を初期化
         rows = table.rows; // テーブルの全行を取得
 
         // 行を比較してソート
         for (let i = 1; i < (rows.length - 1); i++) {
+            //変数の宣言　x:現在のセル y:次のセル shouldSwitch:入れ替えるかどうか
             let x, y, shouldSwitch;
             shouldSwitch = false; // 初期値としてスイッチしない設定
-            x = rows[i].getElementsByTagName("td")[columnIndex]; // 現在のセル
-            y = rows[i + 1].getElementsByTagName("td")[columnIndex]; // 次のセル
+            x = rows[i].getElementsByTagName("td")[columnIndex]; // 現在のセルの値
+            y = rows[i + 1].getElementsByTagName("td")[columnIndex]; // 次のセルの値
 
-            // 数値として比較する
-            if (sortDirections[columnIndex] ? parseInt(x.innerText) > parseInt(y.innerText) : parseInt(x.innerText) < parseInt(y.innerText)) {
-                shouldSwitch = true; // ソートが必要な場合はフラグを立てる
+            if (sortDirections[columnIndex]) {
+                // 昇順の場合　現在のセルの値が次のセルの値より大きい場合
+                if (parseInt(x.innerText) > parseInt(y.innerText)) {
+                    shouldSwitch = true;
+                }
+            } else {
+                // 降順の場合　現在のセルの値が次のセルの値より小さい場合
+                if (parseInt(x.innerText) < parseInt(y.innerText)) {
+                    shouldSwitch = true;
+                }
             }
 
             //console.log('rows.length' + rows.length + ' switching:' + switching + ' i:' + i + ' x:' + x.innerText + ' y:' + y.innerText + ' shouldSwitch:' + shouldSwitch); // デバッグ用のログ
 
             if (shouldSwitch) {
                 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]); // 行を交換
-                issortnesesary = true; // ソートが続くことを示す
+                isSortNecessary = true; // ソートが続くことを示す
                 break; // 交換が発生した場合はループを終了
             }
         }

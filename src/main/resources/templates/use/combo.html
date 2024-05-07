@@ -51,35 +51,35 @@
         <table class="tablesorter" id="myTable">
             <thead>
                 <tr>
-                    <button class="header" onclick="sortTable(0)">ID</button>
-                    <button class="header" onclick="sortTable(1)">名前</button>
-                    <button class="header" onclick="sortTable(2)">ダメージ</button>
-                    <button class="header">入力</button>
-                    <button class="header" onclick="sortTable(4)">発生</button>
-                    <button class="header" onclick="sortTable(5)">使用DG</button>
-                    <button class="header" onclick="sortTable(6)">使用SA</button>
-                    <button class="header">説明</button>
-                    <button class="header">カウンター状況</button>
+                    <th class="header id" onclick="sortTable(0)">ID</th>
+                    <th class="header name" onclick="sortTable(1)">名前</th>
+                    <th class="header damage" onclick="sortTable(2)">ダメージ</th>
+                    <th class="header input">入力</th>
+                    <th class="header startup" onclick="sortTable(4)">発生</th>
+                    <th class="header usagedg" onclick="sortTable(5)">使用DG</th>
+                    <th class="header usagesa" onclick="sortTable(6)">使用SA</th>
+                    <th class="header explain">説明</th>
+                    <th class="header hittype">カウンター状況</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="table-row" th:each="combo : ${combos}">
-                    <td th:text="${combo.id}" data-id="${combo.id}"></td>
-                    <td><span class="editable" data-name="name" th:data-id="${combo.id}" th:text="${combo.name}"></span>
+                    <td class="id" th:text="${combo.id}" data-id="${combo.id}"></td>
+                    <td><span class="editable name" data-name="name" th:data-id="${combo.id}" th:text="${combo.name}"></span>
                     </td>
-                    <td><span class="editable" data-name="damage" th:data-id="${combo.id}"
+                    <td><span class="editable damage" data-name="damage" th:data-id="${combo.id}"
                             th:text="${combo.damage}"></span> </td>
-                    <td><span class="editable" data-name="input" th:data-id="${combo.id}"
+                    <td><span class="editable input" data-name="input" th:data-id="${combo.id}"
                             th:text="${combo.input}"></span> </td>
-                    <td><span class="editable" data-name="startup" th:data-id="${combo.id}"
+                    <td><span class="editable startup" data-name="startup" th:data-id="${combo.id}"
                             th:text="${combo.startup}"></span></td>
-                    <td><span class="editable" data-name="usagedg" th:data-id="${combo.id}"
+                    <td><span class="editable usagedg" data-name="usagedg" th:data-id="${combo.id}"
                             th:text="${combo.usagedg}"></span></td>
-                    <td><span class="editable" data-name="usagesa" th:data-id="${combo.id}"
+                    <td><span class="editable usagesa" data-name="usagesa" th:data-id="${combo.id}"
                             th:text="${combo.usagesa}"></span></td>
-                    <td><span class="editable" data-name="explain" th:data-id="${combo.id}"
+                    <td><span class="editable explain" data-name="explain" th:data-id="${combo.id}"
                             th:text="${combo.explain}"></span></td>
-                    <td> <span class="editable" data-name="hittype" th:data-id="${combo.id}">
+                    <td> <span class="editable hittype" data-name="hittype" th:data-id="${combo.id}">
                             <span th:switch="${combo.hittype}">
                                 <span th:case="0">ノーマルヒット</span>
                                 <span th:case="1">カウンター</span>

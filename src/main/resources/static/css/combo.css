@@ -35,3 +35,39 @@ th.asc::after {
 table {
     border-collapse: collapse;
 }
+
+.id {
+    width: 50px;
+}
+
+.name {
+    width: 150px;
+}
+
+.damage {
+    width: 50px;
+}
+
+.input {
+    width: 500px;
+}
+
+.startup {
+    width: 30px;
+}
+
+.usagedg {
+    width: 30px;
+}
+
+.usagesa{
+    width: 30px;
+}
+
+.explain {
+    width: 250px;
+}
+
+.hittype{
+    width: 120px;
+}
