@@ -59,11 +59,6 @@ public class HelloController {
         return "use/html";
     }
 
-    @RequestMapping("/buttontest")
-    public String buttontest(Model model) {
-        return "use/buttontest";
-    }
-
     @GetMapping("/tmptest")
     public String showsituation(Model model) {
         List<situationEntity> situations = situationService.findAllsituation();
